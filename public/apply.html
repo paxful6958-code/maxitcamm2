@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max it Cameroon - Secure Loan Application</title>
+    <title>Max it Cameroun - Demande de prêt sécurisée</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -324,8 +324,8 @@
 
     <div class="form-container">
         <div class="form-header">
-            <h2>Loan Application</h2>
-            <p id="step-indicator">Step 1: Loan Details</p>
+            <h2>Demande de prêt</h2>
+            <p id="step-indicator">Étape 1 : Détails du prêt</p>
             <div class="progress-bar">
                 <div class="progress-segment active" id="prog-1"></div>
                 <div class="progress-segment" id="prog-2"></div>
@@ -337,69 +337,69 @@
 
             <div class="form-step active" id="step-1">
                 <div class="form-group">
-                    <label>Loan Type</label>
+                    <label>Type de prêt</label>
                     <select class="form-control" id="loanType" required>
-                        <option value="" disabled selected>Select a loan type...</option>
-                        <option value="Personal Loan">Personal Loan</option>
-                        <option value="Business/SME Loan">Business/SME Loan</option>
-                        <option value="Education/Student Loan">Education/Student Loan</option>
-                        <option value="Emergency/Medical Loan">Emergency/Medical Loan</option>
-                        <option value="Home Improvement">Home Improvement</option>
+                        <option value="" disabled selected>Sélectionnez un type de prêt...</option>
+                        <option value="Prêt personnel">Prêt personnel</option>
+                        <option value="Prêt entreprise / PME">Prêt entreprise / PME</option>
+                        <option value="Prêt études / étudiant">Prêt études / étudiant</option>
+                        <option value="Prêt urgence / médical">Prêt urgence / médical</option>
+                        <option value="Amélioration de l'habitat">Amélioration de l'habitat</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Loan Amount (XAF)</label>
+                    <label>Montant du prêt (XAF)</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-money-bill-wave"></i>
-                        <input type="number" class="form-control" id="loanAmount" placeholder="e.g. 250000" min="25000" max="2500000" step="25000" required>
+                        <input type="number" class="form-control" id="loanAmount" placeholder="ex. 250000" min="25000" max="2500000" step="25000" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Repayment Term</label>
+                    <label>Durée de remboursement</label>
                     <select class="form-control" id="loanTerm" required>
-                        <option value="" disabled selected>Select duration...</option>
-                        <option value="3">3 Months</option>
-                        <option value="6">6 Months</option>
-                        <option value="9">9 Months</option>
-                        <option value="12">12 Months (1 Year)</option>
-                        <option value="18">18 Months</option>
-                        <option value="24">24 Months (2 Years)</option>
+                        <option value="" disabled selected>Sélectionnez la durée...</option>
+                        <option value="3">3 mois</option>
+                        <option value="6">6 mois</option>
+                        <option value="9">9 mois</option>
+                        <option value="12">12 mois (1 an)</option>
+                        <option value="18">18 mois</option>
+                        <option value="24">24 mois (2 ans)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Brief Purpose of Loan</label>
-                    <textarea class="form-control" id="loanPurpose" placeholder="Tell us briefly how you plan to use these funds..." required></textarea>
+                    <label>Brève description du motif du prêt</label>
+                    <textarea class="form-control" id="loanPurpose" placeholder="Dites-nous brièvement comment vous comptez utiliser ces fonds..." required></textarea>
                 </div>
 
                 <div class="button-group">
-                    <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(1)">Étape suivante <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
 
             <div class="form-step" id="step-2">
                 <div class="form-group">
-                    <label>First Name</label>
+                    <label>Prénom</label>
                     <div class="input-wrapper">
                         <i class="fa-regular fa-user"></i>
-                        <input type="text" class="form-control" id="firstName" placeholder="Legal First Name" required>
+                        <input type="text" class="form-control" id="firstName" placeholder="Prénom légal" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Last Name</label>
+                    <label>Nom</label>
                     <div class="input-wrapper">
                         <i class="fa-regular fa-user"></i>
-                        <input type="text" class="form-control" id="lastName" placeholder="Legal Last Name" required>
+                        <input type="text" class="form-control" id="lastName" placeholder="Nom légal" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Email Address</label>
+                    <label>Adresse e-mail</label>
                     <div class="input-wrapper">
                         <i class="fa-regular fa-envelope"></i>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                        <input type="email" class="form-control" id="email" placeholder="vous@example.com" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Orange Money / Mobile Money Number</label>
+                    <label>Numéro Orange Money / Mobile Money</label>
                     <div class="phone-input-group">
                         <div class="country-code">+237</div>
                         <input type="tel" class="form-control" id="phone" placeholder="699000000" maxlength="9" pattern="[0-9]{9}" required>
@@ -407,71 +407,71 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="button" class="btn btn-secondary" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
-                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">Étape suivante <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
 
             <div class="form-step" id="step-3">
                 <div class="form-group">
-                    <label>Employment Status</label>
+                    <label>Situation professionnelle</label>
                     <select class="form-control" id="empStatus" required>
-                        <option value="" disabled selected>Select status...</option>
-                        <option value="Full-Time Employed">Full-Time Employed</option>
-                        <option value="Part-Time Employed">Part-Time Employed</option>
-                        <option value="Self-Employed / Freelance">Self-Employed / Freelance</option>
-                        <option value="Business Owner">Business Owner</option>
-                        <option value="Student">Student</option>
-                        <option value="Retired">Retired</option>
-                        <option value="Unemployed">Unemployed</option>
+                        <option value="" disabled selected>Sélectionnez la situation...</option>
+                        <option value="Salarié à temps plein">Salarié à temps plein</option>
+                        <option value="Salarié à temps partiel">Salarié à temps partiel</option>
+                        <option value="Indépendant / Freelance">Indépendant / Freelance</option>
+                        <option value="Chef d'entreprise">Chef d'entreprise</option>
+                        <option value="Étudiant">Étudiant</option>
+                        <option value="Retraité">Retraité</option>
+                        <option value="Sans emploi">Sans emploi</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Industry / Sector</label>
+                    <label>Secteur d'activité / Industrie</label>
                     <select class="form-control" id="empSector" required>
-                        <option value="" disabled selected>Select industry...</option>
-                        <option value="Technology & IT">Technology & IT</option>
-                        <option value="Healthcare & Medical">Healthcare & Medical</option>
-                        <option value="Education">Education</option>
-                        <option value="Finance & Banking">Finance & Banking</option>
-                        <option value="Retail & Trade">Retail & Trade</option>
-                        <option value="Construction & Real Estate">Construction & Real Estate</option>
-                        <option value="Government & Public Sector">Government & Public Sector</option>
+                        <option value="" disabled selected>Sélectionnez le secteur...</option>
+                        <option value="Technologie & IT">Technologie & IT</option>
+                        <option value="Santé & Médical">Santé & Médical</option>
+                        <option value="Éducation">Éducation</option>
+                        <option value="Finance & Banque">Finance & Banque</option>
+                        <option value="Commerce & Vente au détail">Commerce & Vente au détail</option>
+                        <option value="Construction & Immobilier">Construction & Immobilier</option>
+                        <option value="Gouvernement & Secteur public">Gouvernement & Secteur public</option>
                         <option value="Agriculture">Agriculture</option>
-                        <option value="Other">Other</option>
+                        <option value="Autre">Autre</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Estimated Monthly Income (XAF)</label>
+                    <label>Revenu mensuel estimé (XAF)</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-wallet"></i>
-                        <input type="number" class="form-control" id="monthlyIncome" placeholder="e.g. 150000" required>
+                        <input type="number" class="form-control" id="monthlyIncome" placeholder="ex. 150000" required>
                     </div>
                 </div>
 
                 <div class="summary-box">
-                    <h4><i class="fa-solid fa-file-invoice-dollar" style="color: var(--orange); margin-right: 8px;"></i> Application Summary</h4>
+                    <h4><i class="fa-solid fa-file-invoice-dollar" style="color: var(--orange); margin-right: 8px;"></i> Résumé de la demande</h4>
                     <div class="summary-row">
-                        <span class="summary-label">Applicant:</span>
+                        <span class="summary-label">Demandeur :</span>
                         <span class="summary-value" id="sum-name">-</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Loan Request:</span>
+                        <span class="summary-label">Demande de prêt :</span>
                         <span class="summary-value" id="sum-amount">-</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Duration:</span>
+                        <span class="summary-label">Durée :</span>
                         <span class="summary-value" id="sum-term">-</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Est. Monthly Repayment:</span>
+                        <span class="summary-label">Mensualité estimée :</span>
                         <span class="summary-value highlight-value" id="sum-emi">-</span>
                     </div>
                 </div>
 
                 <div class="button-group">
-                    <button type="button" class="btn btn-secondary" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> Back</button>
-                    <button type="button" class="btn btn-primary" id="submitBtn" onclick="submitApplication()">Confirm & Apply <i class="fa-solid fa-check"></i></button>
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+                    <button type="button" class="btn btn-primary" id="submitBtn" onclick="submitApplication()">Confirmer et demander <i class="fa-solid fa-check"></i></button>
                 </div>
             </div>
 
@@ -479,7 +479,7 @@
     </div>
 
     <script>
-        const stepTitles = ["Step 1: Loan Details", "Step 2: Personal Info", "Step 3: Financial Profile"];
+        const stepTitles = ["Étape 1 : Détails du prêt", "Étape 2 : Informations personnelles", "Étape 3 : Profil financier"];
         const ANNUAL_INTEREST_RATE = 0.18;
 
         function validateCurrentStep(stepNumber) {
@@ -497,7 +497,7 @@
             });
 
             if (!isValid) {
-                alert("Please fill in all required fields before continuing.");
+                alert("Veuillez remplir tous les champs obligatoires avant de continuer.");
             }
             return isValid;
         }
@@ -557,7 +557,7 @@
 
             document.getElementById('sum-name').innerText = `${firstName} ${lastName}`;
             document.getElementById('sum-amount').innerText = `${amount.toLocaleString()} XAF`;
-            document.getElementById('sum-term').innerText = `${months} Months`;
+            document.getElementById('sum-term').innerText = `${months} mois`;
             document.getElementById('sum-emi').innerText = `${Math.round(emi).toLocaleString()} XAF`;
         }
 
@@ -565,7 +565,7 @@
             if (!validateCurrentStep(3)) return;
 
             const btn = document.getElementById('submitBtn');
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Traitement en cours...';
             btn.style.opacity = '0.8';
             btn.style.disabled = true;
 
